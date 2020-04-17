@@ -21,7 +21,7 @@ public class Gibb {
         money = money + (moneyPerClick*multiplier);
     }
     public void addMoney() {
-        money = money;
+
     }
     /*------------------------------------------------
                           Getter
@@ -40,7 +40,7 @@ public class Gibb {
 
     /*------------------------------------------------
                               Setter
-        ------------------------------------------------*/
+    ------------------------------------------------*/
     public void setMoneyPerClick(long moneyPerClick) {
         this.moneyPerClick = moneyPerClick;
     }
