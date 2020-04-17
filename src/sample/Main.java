@@ -9,8 +9,9 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
-public class Gibb extends Application {
-        Scene scene1;
+public class Main extends Application {
+    Stage fenster;
+    Scene scene1;
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -28,9 +29,9 @@ public class Gibb extends Application {
         grid_main.setGridLinesVisible(true);
 
 
-
+        fenster = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Gibb Clicker");
         primaryStage.setScene(new Scene(root, 1500, 1000));
         primaryStage.show();
     }
