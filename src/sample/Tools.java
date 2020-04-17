@@ -34,8 +34,8 @@ public class Tools {
                           Getter
     ------------------------------------------------*/
     public int getMultiplier() {
-        int Tool_ID = getToolID();
-        List<Upgrades> = getUpgradesWithToolID();
+       // int Tool_ID = getToolID();
+        //List<Upgrades> = getUpgradesWithToolID();
         return multiplier;
     }
 

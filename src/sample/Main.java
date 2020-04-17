@@ -72,11 +72,10 @@ public class Main extends Application {
         btn_Gibb = new Button();
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
+        btn_Gibb.getStyleClass().add("btn_Gibb");
         label_moneyPerSecond =  new Label(4324.5 + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
         grid_center.setAlignment(Pos.CENTER);
-
-
 
 
         grid_powerups.add(label_powerups1, 0,0);
