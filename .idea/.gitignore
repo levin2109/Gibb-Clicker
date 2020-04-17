@@ -138,8 +138,10 @@ $RECYCLE.BIN/
 *.msix
 *.msm
 *.msp
-
+.idea/workspace.xml
 # Windows shortcuts
 *.lnk
 
 # End of https://www.gitignore.io/api/java,windows,intellij
+
+*.xml
