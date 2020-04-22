@@ -38,7 +38,6 @@ public class ToolsJDBCDoa {
         String sql = "Select * from Tools";
         try {
             con = openConnection();
-
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {

@@ -22,14 +22,6 @@ public class Main extends Application {
             btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb, btn_tool1, btn_save, btn_exit;
     Image icon_1;
 
-    /*
-List<Tools> toolsList = new ArrayList<Tools>;
-for (Tools tool : toolsList.loadTools()) {
-    tool.loadMoneyPerSecond();
-    tool.loadMultiplier();
-        }
-    */
-
     public void start(Stage primaryStage) throws Exception{
 
         /* Grids */
@@ -210,6 +202,11 @@ for (Tools tool : toolsList.loadTools()) {
 
 
     public static void main(String[] args) {
-        launch(args);
+        /*ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+        for (Tools tool : Tools.loadTools()) {
+            tool.loadMoneyPerSecond();
+            tool.loadMultiplier();
+            System.out.println(tool.getMoneyPerSecond()+tool.getMultiplier());
+        }*/
     }
 }

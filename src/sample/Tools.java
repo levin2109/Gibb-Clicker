@@ -10,6 +10,7 @@ public class Tools {
     private long moneyPerSecond;
     private int multiplier;
     private long pricePerLevel;
+    ToolsJDBCDoa Tools = new ToolsJDBCDoa();
 
 
     /*------------------------------------------------
@@ -31,7 +32,6 @@ public class Tools {
         status = true;
     }
     public void loadMoneyPerSecond() {
-        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
         int ID_Tools = Tools.getToolID(this.name);
         this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
     }
@@ -73,9 +73,7 @@ public class Tools {
         this.multiplier = multiplier;
     }
 
-    public void setMoneyPerSecond() {
-
-    }
+    public void setMoneyPerSecond(long moneyPerSecond) { this.moneyPerSecond = moneyPerSecond; }
 
     public void setStatus(boolean status) {
         this.status = status;
