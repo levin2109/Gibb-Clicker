@@ -55,7 +55,7 @@ public class ToolsJDBCDoa {
 
     public long calcMoneyPerSecond(int ID_Tools) {
         long money = 0;
-        String sql = "Select MoneyPerSecond, Level from Tools where active = true && ID_Tools = ?";
+        String sql = "Select MoneyPerSecond, Level from Tools join User_Tools on ID_Tools=Tools_ID where status = true && ID_Tools = ?";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
