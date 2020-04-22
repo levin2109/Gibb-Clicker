@@ -1,6 +1,6 @@
 package sample;
 
-import java.util.List;
+import domain.ToolsJDBCDoa;
 
 public class Tools {
     private String name;
@@ -67,7 +67,8 @@ public class Tools {
     }
 
     public void setMoneyPerSecond(long moneyPerSecond) {
-        this.moneyPerSecond = moneyPerSecond;
+        int ID_Tools = this.getToolID(this.name);
+        this.calcMoneyPerSecond();
     }
 
     public void setStatus(boolean status) {

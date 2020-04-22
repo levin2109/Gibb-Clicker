@@ -14,6 +14,24 @@ public class ToolsJDBCDoa {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
+    public int getToolID(String name) {
+        int ID_Tools = 0;
+        String sql = "Select ID_Tools from Tools where name = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,name);
+            rs = ps.executeQuery();
+            ID_Tools = rs.getInt("ID_Tools");
+            closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ID_Tools;
+    }
+
     public List<Tools> loadTools() {
         List<Tools> all = new ArrayList<>();
 
@@ -34,7 +52,26 @@ public class ToolsJDBCDoa {
             e.printStackTrace();
         }
         return all;
+    }
 
+    public long calcMoneyPerSecond(int ID_Tools) {
+        long money = 0;
+        String sql = "Select MoneyPerSecond, Level from Tools where active = true && ID_Tools = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,ID_Tools);
+            rs = ps.executeQuery();
+            Long moneyPerSecond = rs.getLong("MoneyPerSecond");
+            int level = rs.getInt("Level");
+            money = moneyPerSecond * level;
+            closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return money;
     }
 
     private Connection openConnection() throws SQLException {
