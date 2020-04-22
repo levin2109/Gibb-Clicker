@@ -7,20 +7,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
 
 
 public class Main extends Application {
     Stage fenster;
     Scene scene1;
-    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools;
+    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_tool1;
     Button btn_powerups1,btn_powerups2, btn_powerups3, btn_powerups4, btn_powerups5, btn_powerups6, btn_powerups7,
-            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb;
+            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb, btn_tool1;
+    Image icon_1;
+
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -79,6 +83,9 @@ public class Main extends Application {
         label_moneyPerSecond =  new Label(4324.5 + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
 
+        btn_tool1 = new Button("Level Up");
+        icon_1 = new Image(new FileInputStream("Klangbruecke.png"));
+        ImageView imageView = new ImageView(icon_1);
 
         grid_powerups.add(label_powerups1, 0,0);
         grid_powerups.add(btn_powerups1, 0, 1);
@@ -97,6 +104,9 @@ public class Main extends Application {
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
         grid_center.add(label_balance, 0, 0);
+
+
+
 
         label_powerups1.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_powerups1, 0.0);
