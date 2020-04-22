@@ -66,9 +66,10 @@ public class Tools {
         this.multiplier = multiplier;
     }
 
-    public void setMoneyPerSecond(long moneyPerSecond) {
-        int ID_Tools = this.getToolID(this.name);
-        this.calcMoneyPerSecond();
+    public void setMoneyPerSecond() {
+        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+        int ID_Tools = Tools.getToolID(this.name);
+        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
     }
 
     public void setStatus(boolean status) {
