@@ -26,16 +26,27 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception{
 
+        /* Grids */
         GridPane grid_main = new GridPane();
-        GridPane grid_powerups = new GridPane();
         GridPane grid_center = new GridPane();
         GridPane grid_tools = new GridPane();
-        grid_main.getStyleClass().add("grid_main");
+        GridPane grid_powerups = new GridPane();
+
+
+        grid_main.setMinWidth(1500);
+        grid_main.setMaxWidth(1500);
+        grid_main.setMaxHeight(750);
+        grid_main.setMinHeight(750);
+
+
+
+
+
         btn_save = new Button("Spiel speichern");
         btn_exit = new Button("Spiel beenden");
 
 
-
+        /* Power Ups */
         label_powerups1 = new Label("Powerups");
         btn_powerups1 = new Button("Test");
         btn_powerups2 = new Button("Test");
@@ -49,7 +60,6 @@ public class Main extends Application {
         btn_powerups10 = new Button("Test");
         btn_powerups11 = new Button("Test");
         btn_powerups12 = new Button("Test");
-
         btn_powerups1.setPrefWidth(80);
         btn_powerups2.setPrefWidth(80);
         btn_powerups3.setPrefWidth(80);
@@ -62,7 +72,6 @@ public class Main extends Application {
         btn_powerups10.setPrefWidth(80);
         btn_powerups11.setPrefWidth(80);
         btn_powerups12.setPrefWidth(80);
-
         btn_powerups1.setPrefHeight(80);
         btn_powerups2.setPrefHeight(80);
         btn_powerups3.setPrefHeight(80);
@@ -75,6 +84,20 @@ public class Main extends Application {
         btn_powerups10.setPrefHeight(80);
         btn_powerups11.setPrefHeight(80);
         btn_powerups12.setPrefHeight(80);
+        grid_powerups.add(label_powerups1, 0,0);
+        grid_powerups.add(btn_powerups1, 0, 1);
+        grid_powerups.add(btn_powerups2, 1, 1);
+        grid_powerups.add(btn_powerups3, 2, 1);
+        grid_powerups.add(btn_powerups4, 3, 1);
+        grid_powerups.add(btn_powerups5, 4, 1);
+        grid_powerups.add(btn_powerups6, 0, 2);
+        grid_powerups.add(btn_powerups7, 1, 2);
+        grid_powerups.add(btn_powerups8, 2, 2);
+        grid_powerups.add(btn_powerups9, 3, 2);
+        grid_powerups.add(btn_powerups10, 4, 2);
+        grid_powerups.add(btn_powerups11, 0, 3);
+        grid_powerups.add(btn_powerups12, 1, 3);
+
 
         label_balance = new Label(10349032 + " $");
         btn_Gibb = new Button();
@@ -91,19 +114,7 @@ public class Main extends Application {
         label_tool_price = new Label(10 +" $");
 
 
-        grid_powerups.add(label_powerups1, 0,0);
-        grid_powerups.add(btn_powerups1, 0, 1);
-        grid_powerups.add(btn_powerups2, 1, 1);
-        grid_powerups.add(btn_powerups3, 2, 1);
-        grid_powerups.add(btn_powerups4, 3, 1);
-        grid_powerups.add(btn_powerups5, 4, 1);
-        grid_powerups.add(btn_powerups6, 0, 2);
-        grid_powerups.add(btn_powerups7, 1, 2);
-        grid_powerups.add(btn_powerups8, 2, 2);
-        grid_powerups.add(btn_powerups9, 3, 2);
-        grid_powerups.add(btn_powerups10, 4, 2);
-        grid_powerups.add(btn_powerups11, 0, 3);
-        grid_powerups.add(btn_powerups12, 1, 3);
+
 
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -154,22 +165,7 @@ public class Main extends Application {
         label_powerups1.setFont(Font.font("Helvetica", 27));
         label_tools.setFont(Font.font("Helvetica", 27));
 
-        grid_main.add(label_title, 0, 0);
-        grid_main.add(grid_powerups, 0,1);
-        grid_main.add(grid_center, 1,1);
-        grid_main.add(grid_tools, 2, 1);
-        grid_main.add(btn_save, 0, 2);
-        grid_main.add(btn_exit, 0, 2);
-        btn_save.getStyleClass().add("save_and_exit");
-        grid_main.setColumnSpan(btn_save, 1300);
-        grid_main.setColumnSpan(btn_exit, 1500);
-        grid_main.setColumnSpan(label_title, 1500);
 
-
-        grid_main.setMinWidth(1500);
-        grid_main.setMaxWidth(1500);
-        grid_main.setMaxHeight(750);
-        grid_main.setMinHeight(750);
 
         grid_powerups.setMinWidth(400);
         grid_powerups.setMaxWidth(400);
@@ -185,6 +181,17 @@ public class Main extends Application {
         grid_tools.setMaxWidth(400);
         grid_tools.setMaxHeight(700);
         grid_tools.setMinHeight(700);
+
+        /* Main Grid */
+
+        grid_main.getStyleClass().add("grid_main");
+        grid_main.add(label_title, 0, 0);
+        grid_main.add(grid_powerups, 0,1);
+        grid_main.add(grid_center, 1,1);
+        grid_main.add(grid_tools, 2, 1);
+        grid_main.add(btn_save,2,2);
+        btn_save.getStyleClass().add("btn_save");
+        grid_main.setColumnSpan(label_title, 1500);
 
         scene1 = new Scene(grid_main, 1500, 775);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
