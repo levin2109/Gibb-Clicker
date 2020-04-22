@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -23,6 +22,13 @@ public class Main extends Application {
             btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb, btn_tool1, btn_save, btn_exit;
     Image icon_1;
 
+    /*
+List<Tools> toolsList = new ArrayList<Tools>;
+for (Tools tool : toolsList.loadTools()) {
+    tool.loadMoneyPerSecond();
+    tool.loadMultiplier();
+        }
+    */
 
     public void start(Stage primaryStage) throws Exception{
 

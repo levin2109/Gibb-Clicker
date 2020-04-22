@@ -30,7 +30,14 @@ public class Tools {
     public void activate() {
         status = true;
     }
+    public void loadMoneyPerSecond() {
+        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+        int ID_Tools = Tools.getToolID(this.name);
+        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
+    }
+    public void loadMultiplier() {
 
+    }
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/
@@ -67,9 +74,7 @@ public class Tools {
     }
 
     public void setMoneyPerSecond() {
-        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-        int ID_Tools = Tools.getToolID(this.name);
-        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
+
     }
 
     public void setStatus(boolean status) {
