@@ -18,8 +18,9 @@ import javafx.scene.image.Image;
 public class Main extends Application {
     Stage fenster;
     Scene scene1;
-    Label label_powerups1, label_balance, label_moneyPerSecond, label_title;
-    Button btn_powerups1,btn_powerups2, btn_powerups3, btn_powerups4, btn_powerups5, btn_powerups6, btn_powerups7, btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb;
+    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools;
+    Button btn_powerups1,btn_powerups2, btn_powerups3, btn_powerups4, btn_powerups5, btn_powerups6, btn_powerups7,
+            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb;
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -27,6 +28,8 @@ public class Main extends Application {
         GridPane grid_powerups = new GridPane();
         GridPane grid_center = new GridPane();
         GridPane grid_tools = new GridPane();
+        grid_main.getStyleClass().add("grid_main");
+
 
         label_powerups1 = new Label("Powerups");
         btn_powerups1 = new Button("Test");
@@ -75,7 +78,6 @@ public class Main extends Application {
         btn_Gibb.getStyleClass().add("btn_Gibb");
         label_moneyPerSecond =  new Label(4324.5 + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
-        grid_center.setAlignment(Pos.CENTER);
 
 
         grid_powerups.add(label_powerups1, 0,0);
@@ -96,6 +98,13 @@ public class Main extends Application {
         grid_center.add(btn_Gibb, 0, 2);
         grid_center.add(label_balance, 0, 0);
 
+        label_powerups1.setMaxWidth(Double.MAX_VALUE);
+        AnchorPane.setLeftAnchor(label_powerups1, 0.0);
+        AnchorPane.setRightAnchor(label_powerups1, 0.0);
+        label_powerups1.setAlignment(Pos.CENTER);
+        grid_main.setColumnSpan(label_powerups1, 500);
+
+
         label_title.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_title, 0.0);
         AnchorPane.setRightAnchor(label_title, 0.0);
@@ -110,6 +119,11 @@ public class Main extends Application {
         label_balance.setAlignment(Pos.CENTER);
         label_title.setFont(Font.font("Helvetica", 30));
         label_balance.setFont(Font.font("Helvetica", 60));
+        label_moneyPerSecond.setFont(Font.font("Helvetica", 20));
+        label_powerups1.setFont(Font.font("Helvetica", 27));
+
+
+
 
         grid_main.add(label_title, 0, 0);
         grid_main.add(grid_powerups, 0,1);
@@ -119,25 +133,25 @@ public class Main extends Application {
 
         grid_main.setMinWidth(1500);
         grid_main.setMaxWidth(1500);
-        grid_main.setMaxHeight(1000);
-        grid_main.setMinHeight(1000);
+        grid_main.setMaxHeight(700);
+        grid_main.setMinHeight(700);
 
         grid_powerups.setMinWidth(400);
         grid_powerups.setMaxWidth(400);
-        grid_powerups.setMaxHeight(1000);
-        grid_powerups.setMinHeight(1000);
+        grid_powerups.setMaxHeight(700);
+        grid_powerups.setMinHeight(700);
 
         grid_center.setMinWidth(700);
         grid_center.setMaxWidth(700);
-        grid_center.setMaxHeight(1000);
-        grid_center.setMinHeight(1000);
+        grid_center.setMaxHeight(700);
+        grid_center.setMinHeight(700);
 
         grid_tools.setMinWidth(400);
         grid_tools.setMaxWidth(400);
-        grid_tools.setMaxHeight(1000);
-        grid_tools.setMinHeight(1000);
+        grid_tools.setMaxHeight(700);
+        grid_tools.setMinHeight(700);
 
-        scene1 = new Scene(grid_main, 1500, 1000);
+        scene1 = new Scene(grid_main, 1500, 700);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         fenster = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));

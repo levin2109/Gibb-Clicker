@@ -1,3 +1,9 @@
 .btn_Gibb{
-    -fx-background-image: url("/sample/gibb1.jpg");
+    -fx-background-image: url("/sample/gibb.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: white;
+}
+.grid_main{
+    -fx-background-color: white;
 }
