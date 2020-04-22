@@ -9,19 +9,20 @@ public class Tools {
     private boolean status;
     private long moneyPerSecond;
     private int multiplier;
-
+    private long pricePerLevel;
 
 
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier) {
+    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier, long pricePerLevel) {
         this.name = name;
         this.price = price;
         this.level = level;
         this.status = status;
         this.moneyPerSecond = moneyPerSecond;
         this.multiplier = multiplier;
+        this.pricePerLevel = pricePerLevel;
     }
     /*------------------------------------------------
                          Methods
