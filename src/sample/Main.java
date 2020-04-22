@@ -14,15 +14,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-
 
 public class Main extends Application {
     Stage fenster;
     Scene scene1;
-    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_tool1;
+    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_tool1, label_level1, label_tool_price;
     Button btn_powerups1,btn_powerups2, btn_powerups3, btn_powerups4, btn_powerups5, btn_powerups6, btn_powerups7,
-            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb, btn_tool1;
+            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12,  btn_Gibb, btn_tool1, btn_save, btn_exit;
     Image icon_1;
 
 
@@ -33,6 +31,9 @@ public class Main extends Application {
         GridPane grid_center = new GridPane();
         GridPane grid_tools = new GridPane();
         grid_main.getStyleClass().add("grid_main");
+        btn_save = new Button("Spiel speichern");
+        btn_exit = new Button("Spiel beenden");
+
 
 
         label_powerups1 = new Label("Powerups");
@@ -83,9 +84,12 @@ public class Main extends Application {
         label_moneyPerSecond =  new Label(4324.5 + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
 
-        btn_tool1 = new Button("Level Up");
-        icon_1 = new Image(new FileInputStream("Klangbruecke.png"));
-        ImageView imageView = new ImageView(icon_1);
+        label_tools = new Label("Tools");
+        btn_tool1 = new Button();
+        label_tool1 = new Label("Klangbrücke");
+        label_level1 = new Label("0");
+        label_tool_price = new Label(10 +" $");
+
 
         grid_powerups.add(label_powerups1, 0,0);
         grid_powerups.add(btn_powerups1, 0, 1);
@@ -105,14 +109,31 @@ public class Main extends Application {
         grid_center.add(btn_Gibb, 0, 2);
         grid_center.add(label_balance, 0, 0);
 
+        grid_tools.add(label_tools, 0,0);
+        label_tools.getStyleClass().add("label_tools");
+        grid_tools.add(btn_tool1, 0,1);
+        btn_tool1.getStyleClass().add("btn_tool");
+        grid_tools.add(label_tool1, 1,1);
+        label_tool1.getStyleClass().add("label_tool_name");
+        grid_tools.add(label_level1, 2,1);
+        label_level1.getStyleClass().add("label_level");
+        grid_tools.add(label_tool_price, 1,1);
+        label_tool_price.getStyleClass().add("label_tool_price");
 
+
+        label_tools.setMaxWidth(Double.MAX_VALUE);
+        AnchorPane.setLeftAnchor(label_tools, 0.0);
+        AnchorPane.setRightAnchor(label_tools, 0.0);
+        label_tools.setAlignment(Pos.CENTER);
+        grid_main.setColumnSpan(label_tools, 400);
 
 
         label_powerups1.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_powerups1, 0.0);
         AnchorPane.setRightAnchor(label_powerups1, 0.0);
         label_powerups1.setAlignment(Pos.CENTER);
-        grid_main.setColumnSpan(label_powerups1, 500);
+        grid_main.setColumnSpan(label_powerups1, 400);
+
 
 
         label_title.setMaxWidth(Double.MAX_VALUE);
@@ -131,20 +152,24 @@ public class Main extends Application {
         label_balance.setFont(Font.font("Helvetica", 60));
         label_moneyPerSecond.setFont(Font.font("Helvetica", 20));
         label_powerups1.setFont(Font.font("Helvetica", 27));
-
-
-
+        label_tools.setFont(Font.font("Helvetica", 27));
 
         grid_main.add(label_title, 0, 0);
         grid_main.add(grid_powerups, 0,1);
         grid_main.add(grid_center, 1,1);
         grid_main.add(grid_tools, 2, 1);
+        grid_main.add(btn_save, 0, 2);
+        grid_main.add(btn_exit, 0, 2);
+        btn_save.getStyleClass().add("save_and_exit");
+        grid_main.setColumnSpan(btn_save, 1300);
+        grid_main.setColumnSpan(btn_exit, 1500);
         grid_main.setColumnSpan(label_title, 1500);
+
 
         grid_main.setMinWidth(1500);
         grid_main.setMaxWidth(1500);
-        grid_main.setMaxHeight(700);
-        grid_main.setMinHeight(700);
+        grid_main.setMaxHeight(750);
+        grid_main.setMinHeight(750);
 
         grid_powerups.setMinWidth(400);
         grid_powerups.setMaxWidth(400);
@@ -161,7 +186,7 @@ public class Main extends Application {
         grid_tools.setMaxHeight(700);
         grid_tools.setMinHeight(700);
 
-        scene1 = new Scene(grid_main, 1500, 700);
+        scene1 = new Scene(grid_main, 1500, 775);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         fenster = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));

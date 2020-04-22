@@ -7,3 +7,28 @@
 .grid_main{
     -fx-background-color: white;
 }
+.label_tools{
+    -fx-pref-width: 400px;
+}
+.btn_tool{
+    -fx-pref-width: 90px;
+    -fx-pref-height: 90px;
+    -fx-background-image: url("/sample/Klangbruecke.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.label_tool_name{
+    -fx-pref-width: 200px;
+    -fx-alignment: center;
+    -fx-pref-height: 90px;
+}
+.label_tool_price{
+    -fx-pref-width: 200px;
+    -fx-alignment: bottom-center;
+    -fx-pref-height: 90px;
+}
+.label_level{
+    -fx-pref-width: 100px;
+    -fx-alignment: center;
+    -fx-font-size: 80px;
+}
