@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-
+//Hallo du lustiges dings
 public class Main extends Application {
     Stage fenster;
     Scene login, scene1, registartion;
