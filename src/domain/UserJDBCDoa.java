@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserJDBCDoa {
     private Connection con = null;
@@ -22,7 +24,9 @@ public class UserJDBCDoa {
             ps = con.prepareStatement(sql);
             ps.setString(1,username);
             rs = ps.executeQuery();
-            ID_User = rs.getInt("ID_User");
+            if (rs.next()) {
+                ID_User = rs.getInt("ID_User");
+            }
             closeConnection();
             rs.close();
             ps.close();
@@ -57,19 +61,22 @@ public class UserJDBCDoa {
 
     //check username
     public boolean checkUsername(String username) {
-        String username_db = "";
-        boolean correct = false;
-        String sql = "Select Username from User where Username = ?";
+        boolean correct = true;
+        List<String> all = new ArrayList<String>();
+        String sql = "Select Username from User";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,username);
             rs = ps.executeQuery();
-            username_db = rs.getString("Username");
-            closeConnection();
-            if (username != username_db) {
-                correct = true;
+            while (rs.next()) {
+                all.add(rs.getString("Username"));
             }
+            for (String Username : all) {
+                if (username.equals(Username)) {
+                    correct = false;
+                }
+            }
+            closeConnection();
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -87,7 +94,7 @@ public class UserJDBCDoa {
             ps.setString(1,username);
             ps.setString(2,password);
             ps.setLong(3,balance);
-            rs = ps.executeQuery();
+            ps.execute();
             closeConnection();
             rs.close();
             ps.close();
