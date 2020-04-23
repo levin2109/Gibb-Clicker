@@ -32,4 +32,7 @@
     -fx-alignment: center;
     -fx-font-size: 80px;
 }
+.grid_login{
+    -fx-background-color: white;
+}
 
