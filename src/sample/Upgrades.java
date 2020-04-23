@@ -2,7 +2,7 @@ package sample;
 
 public class Upgrades {
     private String name;
-    private String object;
+    private int Tool_ID;
     private int multiplier;
     private long price;
     private boolean status;
@@ -10,9 +10,9 @@ public class Upgrades {
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Upgrades(String name, String object, int multiplier, long price, boolean status) {
+    public Upgrades(String name, int Tool_ID, int multiplier, long price, boolean status) {
         this.name = name;
-        this.object = object;
+        this.Tool_ID = Tool_ID;
         this.multiplier = multiplier;
         this.price = price;
         this.status = status;
@@ -49,8 +49,8 @@ public class Upgrades {
         return multiplier;
     }
 
-    public String getObject() {
-        return object;
+    public int getTool_ID() {
+        return Tool_ID;
     }
 
     public String getName() {
@@ -72,8 +72,8 @@ public class Upgrades {
         this.multiplier = multiplier;
     }
 
-    public void setObject(String object) {
-        this.object = object;
+    public void setObject(int Tool_ID) {
+        this.Tool_ID = Tool_ID;
     }
 
     public void setName(String name) {
