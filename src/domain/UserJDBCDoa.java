@@ -13,6 +13,25 @@ public class UserJDBCDoa {
     /*---------------------------------------------
         Methods for Users (Login & Registration)
      --------------------------------------------*/
+    //Get the user ID with the username
+    public int getUserID(String username) {
+        int ID_User = 0;
+        String sql = "Select ID_User from User where Username = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,username);
+            rs = ps.executeQuery();
+            ID_User = rs.getInt("ID_User");
+            closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ID_User;
+    }
+
     //Login: check the password
     public boolean checkPassword(String name, String password) {
         String password_db = "";
@@ -60,7 +79,7 @@ public class UserJDBCDoa {
     }
 
     //write registration in database
-    public void registration(String username, String password, long balance) {
+    public void registrationUser(String username, String password, long balance) {
         String sql = "Insert into User(Username, Password, Balance) Values (?,?,?)";
         try {
             con = openConnection();
