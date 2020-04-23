@@ -36,14 +36,13 @@ public class Tools {
         this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
     }
     public void loadMultiplier() {
-
+        int ID_Tools = Tools.getToolID(this.name);
+        /*this.multiplier = Tools.*/
     }
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/
     public int getMultiplier() {
-       // int Tool_ID = getToolID();
-        //List<Upgrades> = getUpgradesWithToolID();
         return multiplier;
     }
 

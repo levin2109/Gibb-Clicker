@@ -73,6 +73,24 @@ public class ToolsJDBCDoa {
         return money;
     }
 
+    public long calcMultiplier(int ID_Tools) {
+        int multiplier = 0;
+        String sql = "Select Multiplier from Upgrades join User_Upgrades on ID_Tools=Tools_ID where status = true && ID_Tools = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,ID_Tools);
+            rs = ps.executeQuery();
+            multiplier = rs.getInt("Multiplier");
+                        closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return multiplier;
+    }
+
     private Connection openConnection() throws SQLException {
         return ConnectionFactory.getInstance().getConnection();
     }

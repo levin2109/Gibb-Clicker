@@ -1,6 +1,5 @@
 package sample;
 
-import domain.ToolsJDBCDoa;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -203,13 +202,13 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+        /*ToolsJDBCDoa Tools = new ToolsJDBCDoa();
         for (Tools tool : Tools.loadTools()) {
             if (tool.isStatus() == true) {
                 tool.loadMoneyPerSecond();
                 tool.loadMultiplier();
             }
             System.out.println(tool.getName()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier());
-        }
+        }*/
     }
 }
