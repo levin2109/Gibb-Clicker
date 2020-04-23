@@ -1,5 +1,8 @@
 package sample;
 
+import domain.ToolsJDBCDoa;
+import domain.UpgradesJDBCDoa;
+import domain.UserJDBCDoa;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -139,8 +141,26 @@ public class Main extends Application {
                         label_registration_verification.setFont(Font.font("Helvetica", 12));
                     }
                     else if(password_registration1.getText().equals(password_registration2.getText())){
-                        fenster.setScene(scene1);
-                        fenster.show();
+                        UserJDBCDoa User = new UserJDBCDoa();
+                        UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
+                        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+                        if (User.checkUsername(username_registration.getText())) {
+                            User.registrationUser(username_registration.getText(), password_registration1.getText(), 0);
+                            int User_ID = User.getUserID(username_registration.getText());
+                            for (int i = 0; i < 10; i++) {
+                                Tools.registrateTools(User_ID, i, 0, false);
+                            }
+                            for (int i = 0; i < 40; i++) {
+                                Upgrades.registrateUpgrades(User_ID, i, false);
+                            }
+                            System.out.println(User_ID);
+                            fenster.setScene(scene1);
+                            fenster.show();
+                        } else {
+                            label_registration_verification.setText("Der Benutzername existiert bereits.");
+                            label_registration_verification.setTextFill(Color.web("red"));
+                            label_registration_verification.setFont(Font.font("Helvetica", 12));
+                        }
                     }
                 }
             }

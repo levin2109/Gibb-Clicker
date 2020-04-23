@@ -102,7 +102,7 @@ public class ToolsJDBCDoa {
 
     //registrate tools
     public void registrateTools(int User_ID, int Tools_ID, int level, boolean status) {
-        String sql = "Insert into User(User_ID, Tools_ID, Level, Status) Values (?,?,?,?)";
+        String sql = "Insert into User_Tools(User_ID, Tools_ID, Level, Status) Values (?,?,?,?)";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class ToolsJDBCDoa {
             ps.setInt(2,Tools_ID);
             ps.setInt(3,level);
             ps.setBoolean(4,status);
-            rs = ps.executeQuery();
+            ps.execute();
             closeConnection();
             rs.close();
             ps.close();

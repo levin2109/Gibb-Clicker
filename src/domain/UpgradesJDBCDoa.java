@@ -15,14 +15,14 @@ public class UpgradesJDBCDoa {
      --------------------------------------------*/
     //registrate upgrades
     public void registrateUpgrades(int User_ID, int Upgrades_ID, boolean status) {
-        String sql = "Insert into User(User_ID, Tools_ID, Status) Values (?,?,?)";
+        String sql = "Insert into User_Upgrades(User_ID, Tools_ID, Status) Values (?,?,?)";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, User_ID);
             ps.setInt(2, Upgrades_ID);
             ps.setBoolean(3, status);
-            rs = ps.executeQuery();
+            ps.execute();
             closeConnection();
             rs.close();
             ps.close();
