@@ -180,6 +180,7 @@ public class Main extends Application {
         GridPane grid_center = new GridPane();
         GridPane grid_tools = new GridPane();
         GridPane grid_powerups = new GridPane();
+        GridPane grid_stop = new GridPane();
         grid_main.setMinWidth(1500);
         grid_main.setMaxWidth(1500);
         grid_main.setMaxHeight(750);
@@ -318,12 +319,24 @@ public class Main extends Application {
         grid_main.getStyleClass().add("grid_main");
         btn_save = new Button("Spiel speichern");
         btn_exit = new Button("Spiel beenden");
-        grid_main.add(btn_save,2,2);
+        grid_stop.add(btn_save,0,0);
+        grid_stop.add(btn_exit,1,0);
         grid_main.add(label_title, 0, 0);
         grid_main.add(grid_powerups, 0,1);
         grid_main.add(grid_center, 1,1);
         grid_main.add(grid_tools, 2, 1);
-        btn_save.getStyleClass().add("btn_save");
+        grid_main.add(grid_stop,1,2);
+        grid_stop.setMaxWidth(Double.MAX_VALUE);
+        AnchorPane.setLeftAnchor(grid_stop, 0.0);
+        AnchorPane.setRightAnchor(grid_stop, 0.0);
+        grid_stop.setAlignment(Pos.CENTER);
+        grid_stop.setHgap(10);
+        btn_exit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
         grid_main.setColumnSpan(label_title, 1500);
 
 
