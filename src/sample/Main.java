@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-//Hallo du lustiges dings
 public class Main extends Application {
     Stage fenster;
     Scene login, scene1, registartion;
@@ -72,10 +71,16 @@ public class Main extends Application {
                         label_login_verification.setText("Der Name und/oder Passwort sind leer");
                         label_login_verification.setTextFill(Color.web("red"));
                         label_login_verification.setFont(Font.font("Helvetica", 12));
-                    }
-                    else{
-                        fenster.setScene(scene1);
-                        fenster.show();
+                    } else {
+                        UserJDBCDoa User = new UserJDBCDoa();
+                        if (User.checkPassword(username_login.getText(), password_login.getText())) {
+                            fenster.setScene(scene1);
+                            fenster.show();
+                        } else {
+                            label_login_verification.setText("Der Name und/oder Passwort sind falsch");
+                            label_login_verification.setTextFill(Color.web("red"));
+                            label_login_verification.setFont(Font.font("Helvetica", 12));
+                        }
                     }
                 }
             }
@@ -147,10 +152,10 @@ public class Main extends Application {
                         if (User.checkUsername(username_registration.getText())) {
                             User.registrationUser(username_registration.getText(), password_registration1.getText(), 0);
                             int User_ID = User.getUserID(username_registration.getText());
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 1; i <= 10; i++) {
                                 Tools.registrateTools(User_ID, i, 0, false);
                             }
-                            for (int i = 0; i < 40; i++) {
+                            for (int i = 1; i <= 40; i++) {
                                 Upgrades.registrateUpgrades(User_ID, i, false);
                             }
                             System.out.println(User_ID);

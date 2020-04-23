@@ -36,7 +36,7 @@ public class ToolsJDBCDoa {
         return ID_Tools;
     }
 
-    //create all tools from database
+    //create all tool-objects from database
     public List<Tools> loadTools() {
         List<Tools> all = new ArrayList<>();
 
@@ -104,6 +104,7 @@ public class ToolsJDBCDoa {
     public void registrateTools(int User_ID, int Tools_ID, int level, boolean status) {
         String sql = "Insert into User_Tools(User_ID, Tools_ID, Level, Status) Values (?,?,?,?)";
         try {
+            setForeignKeyChecks0();
             con = openConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1,User_ID);
@@ -112,7 +113,20 @@ public class ToolsJDBCDoa {
             ps.setBoolean(4,status);
             ps.execute();
             closeConnection();
-            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //set foreign keys checks 0
+    public void setForeignKeyChecks0() {
+        String sql = "Set foreign_key_checks = 0";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.execute();
+            closeConnection();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

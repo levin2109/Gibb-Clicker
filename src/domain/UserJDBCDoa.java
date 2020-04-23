@@ -38,19 +38,24 @@ public class UserJDBCDoa {
 
     //Login: check the password
     public boolean checkPassword(String name, String password) {
-        String password_db = "";
+        List<String> allPassword = new ArrayList<String>();
+        List<String> allUsername = new ArrayList<>();
         boolean correct = false;
-        String sql = "Select Password from User where Username = ?";
+        String sql = "Select Password, Username from User";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,name);
             rs = ps.executeQuery();
-            password_db = rs.getString("Password");
-            closeConnection();
-            if (password == password_db) {
-                correct = true;
+            while (rs.next()) {
+                allPassword.add(rs.getString("Password"));
+                allUsername.add(rs.getString("Username"));
             }
+            for (int i = 0; i < allPassword.size(); i++) {
+                if (password.equals(allPassword.get(i)) && name.equals(allUsername.get(i))) {
+                    correct = true;
+                }
+            }
+            closeConnection();
             rs.close();
             ps.close();
         } catch (SQLException e) {
