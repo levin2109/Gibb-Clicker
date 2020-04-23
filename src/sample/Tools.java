@@ -28,16 +28,21 @@ public class Tools {
     /*------------------------------------------------
                          Methods
     ------------------------------------------------*/
+    //Change the Tool to true
     public void activate() {
         status = true;
     }
+
+    //load the Money per Second for the Player when he is back in the game
     public void loadMoneyPerSecond() {
         int ID_Tools = Tools.getToolID(this.name);
-        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools);
+        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools, "cedic3");
     }
+
+    //load the Multiplier for the Player when he is back in the game
     public void loadMultiplier() {
         int ID_Tools = Tools.getToolID(this.name);
-        /*this.multiplier = Tools.*/
+        this.multiplier = Tools.calcMultiplier(ID_Tools, "cedic3");
     }
     /*------------------------------------------------
                           Getter
