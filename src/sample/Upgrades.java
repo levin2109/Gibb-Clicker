@@ -27,8 +27,8 @@ public class Upgrades {
 
     public void buy(Gibb object) {
         if (object.balance > price) {
-            long balance = object.getMoney();
-            object.setMoney(balance - price);
+            long balance = object.getBalance();
+            object.setBalance(balance - price);
             activate();
         } else {
             System.out.println("Du hast zu wenig Geld!");
