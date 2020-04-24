@@ -1,7 +1,9 @@
 package sample;
 
+import domain.UserJDBCDoa;
+
 public class Gibb {
-    public static long balance;
+    public static double balance;
     private long moneyPerClick;
     private int multiplier;
 
@@ -9,9 +11,8 @@ public class Gibb {
                         Constructor
     ------------------------------------------------*/
 
-    public Gibb(long balance, long moneyPerClick) {
+    public Gibb(double balance) {
         this.balance = balance;
-        this.moneyPerClick = moneyPerClick;
     }
 
     /*------------------------------------------------
@@ -21,6 +22,11 @@ public class Gibb {
         balance = balance + (moneyPerClick*multiplier);
     }
 
+    public void loadBalance(String username) {
+        UserJDBCDoa User = new UserJDBCDoa();
+        balance = User.getBalance(username);
+    }
+
     public void addMoneyPerSecond() {
 
     }
@@ -28,7 +34,7 @@ public class Gibb {
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/
-    public static long getMoney() {
+    public static double getBalance() {
         return balance;
     }
 
@@ -47,8 +53,8 @@ public class Gibb {
         this.moneyPerClick = moneyPerClick;
     }
 
-    public static void setMoney(long money) {
-        Gibb.balance = money;
+    public static void setBalance(double balance) {
+        Gibb.balance = balance;
     }
 
     public void setMultiplier(int multiplier) {

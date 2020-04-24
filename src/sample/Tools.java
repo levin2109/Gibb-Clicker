@@ -8,7 +8,7 @@ public class Tools {
     private int level;
     private boolean status;
     private double moneyPerSecond;
-    private int multiplier;
+    private int multiplier = 1;
     private long pricePerLevel;
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
 
@@ -34,15 +34,19 @@ public class Tools {
     }
 
     //load the Money per Second for the Player when he is back in the game
-    public void loadMoneyPerSecond() {
+    public void loadMoneyPerSecond(String username) {
         int ID_Tools = Tools.getToolID(this.name);
-        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools, "cedic3") * multiplier;
+        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools, username) * multiplier;
     }
 
     //load the Multiplier for the Player when he is back in the game
-    public void loadMultiplier() {
+    public void loadMultiplier(String username) {
         int ID_Tools = Tools.getToolID(this.name);
-        this.multiplier = Tools.calcMultiplier(ID_Tools, "cedic3");
+        if (Tools.calcMultiplier(ID_Tools, username) != 0) {
+            this.multiplier = Tools.calcMultiplier(ID_Tools, username);
+        } else {
+            multiplier = 1;
+        }
     }
 
     public int getToolID() {

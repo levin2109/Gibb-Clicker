@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
+    List<Tools> toolsList = new ArrayList<>();
     String username;
     Stage fenster;
     Scene login, scene1, registartion;
@@ -43,6 +44,7 @@ public class Main extends Application {
     UserJDBCDoa User = new UserJDBCDoa();
     UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+    Gibb game = new Gibb(0);
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -83,15 +85,17 @@ public class Main extends Application {
                         label_login_verification.setFont(Font.font("Helvetica", 12));
                     } else {
                         if (User.checkPassword(username_login.getText(), password_login.getText())) {
-                            for (Tools tool : Tools.loadTools(username_login.getText())) {
+                            toolsList = Tools.loadTools(username_login.getText());
+                            for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
-                                    tool.loadMultiplier();
-                                    tool.loadMoneyPerSecond();
+                                    tool.loadMultiplier(username_login.getText());
+                                    tool.loadMoneyPerSecond(username_login.getText());
                                     System.out.println(tool.getName()+" Level "+tool.getLevel()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier()+" status "+tool.isStatus());
                                 }
 
                             }
                             username = username_login.getText();
+                            game.loadBalance(username);
                             fenster.setScene(scene1());
                             fenster.show();
                         } else {
@@ -209,7 +213,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
         ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-
+        /*Timer timer = new Timer();
+        timer.schedule(addMoney(),200);*/
     }
 
     public Scene scene1() {
@@ -295,12 +300,12 @@ public class Main extends Application {
 
 
         /* Center */
-        label_balance = new Label(10349032 + " $");
+        label_balance = new Label(game.getBalance() + " $");
         btn_Gibb = new Button();
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
-        label_moneyPerSecond =  new Label(4324.5 + "$ pro Sekunde");
+        label_moneyPerSecond =  new Label(calcMoneyPerSecond() + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -432,6 +437,18 @@ public class Main extends Application {
         scene1 = new Scene(grid_main, 1500, 775);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         return scene1;
+    }
+
+    public double calcMoneyPerSecond() {
+        double money = 0;
+        for (Tools tool : toolsList) {
+            money = money + tool.getMoneyPerSecond();
+        }
+        return money;
+    }
+
+    public void addMoney() {
+        game.setBalance(calcMoneyPerSecond()/5);
     }
 
 }

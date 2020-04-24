@@ -36,6 +36,28 @@ public class UserJDBCDoa {
         return ID_User;
     }
 
+    //
+    public Long getBalance(String username) {
+        long balance = 0;
+        String sql = "Select Balance from User where Username = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,username);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                balance = rs.getLong("Balance");
+                System.out.println(balance);
+            }
+            closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return balance;
+    }
+
     //Login: check the password
     public boolean checkPassword(String name, String password) {
         List<String> allPassword = new ArrayList<String>();
