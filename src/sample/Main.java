@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Main extends Application {
     String username;
     Stage fenster;
@@ -229,56 +228,61 @@ public class Main extends Application {
 
 
         /* Power Ups */
+
         label_powerups1 = new Label("Powerups");
-        btn_powerups1 = new Button("Test");
-        btn_powerups2 = new Button("Test");
-        btn_powerups3 = new Button("Test");
-        btn_powerups4 = new Button("Test");
-        btn_powerups5 = new Button("Test");
-        btn_powerups6 = new Button("Test");
-        btn_powerups7 = new Button("Test");
-        btn_powerups8 = new Button("Test");
-        btn_powerups9 = new Button("Test");
-        btn_powerups10 = new Button("Test");
-        btn_powerups11 = new Button("Test");
-        btn_powerups12 = new Button("Test");
-        btn_powerups1.setPrefWidth(80);
-        btn_powerups2.setPrefWidth(80);
-        btn_powerups3.setPrefWidth(80);
-        btn_powerups4.setPrefWidth(80);
-        btn_powerups5.setPrefWidth(80);
-        btn_powerups6.setPrefWidth(80);
-        btn_powerups7.setPrefWidth(80);
-        btn_powerups8.setPrefWidth(80);
-        btn_powerups9.setPrefWidth(80);
-        btn_powerups10.setPrefWidth(80);
-        btn_powerups11.setPrefWidth(80);
-        btn_powerups12.setPrefWidth(80);
-        btn_powerups1.setPrefHeight(80);
-        btn_powerups2.setPrefHeight(80);
-        btn_powerups3.setPrefHeight(80);
-        btn_powerups4.setPrefHeight(80);
-        btn_powerups5.setPrefHeight(80);
-        btn_powerups6.setPrefHeight(80);
-        btn_powerups7.setPrefHeight(80);
-        btn_powerups8.setPrefHeight(80);
-        btn_powerups9.setPrefHeight(80);
-        btn_powerups10.setPrefHeight(80);
-        btn_powerups11.setPrefHeight(80);
-        btn_powerups12.setPrefHeight(80);
-        grid_powerups.add(label_powerups1, 0,0);
-        grid_powerups.add(btn_powerups1, 0, 1);
-        grid_powerups.add(btn_powerups2, 1, 1);
-        grid_powerups.add(btn_powerups3, 2, 1);
-        grid_powerups.add(btn_powerups4, 3, 1);
-        grid_powerups.add(btn_powerups5, 4, 1);
-        grid_powerups.add(btn_powerups6, 0, 2);
-        grid_powerups.add(btn_powerups7, 1, 2);
-        grid_powerups.add(btn_powerups8, 2, 2);
-        grid_powerups.add(btn_powerups9, 3, 2);
-        grid_powerups.add(btn_powerups10, 4, 2);
-        grid_powerups.add(btn_powerups11, 0, 3);
-        grid_powerups.add(btn_powerups12, 1, 3);
+        int row = 1;
+        float iButFloat = 0;
+        List<Button> powerupsList = new ArrayList<>();
+        for(int i = 0; i < Upgrades.loadUpgrades().size(); i++){
+            if(iButFloat / 5 % 1 == 0){
+                row++;
+            }
+            System.out.println(Upgrades.loadUpgrades().get(i).getName());
+            Button powerup = new Button(Upgrades.loadUpgrades().get(i).getName());
+            powerup.setPrefWidth(80);
+            powerup.setPrefHeight(80);
+            grid_powerups.add(powerup, i % 5, row);
+            powerupsList.add(powerup);
+            iButFloat = iButFloat + 1;
+            switch (Upgrades.loadUpgrades().get(i).getTool_ID()){
+                case 1:
+                    powerup.getStyleClass().add("powerup_Smartlearn");
+                    break;
+                case 2:
+                    powerup.getStyleClass().add("powerup_VMs");
+                    break;
+                case 3:
+                    powerup.getStyleClass().add("powerup_Lehrer");
+                    break;
+                case 4:
+                    powerup.getStyleClass().add("powerup_Kantine");
+                    break;
+                case 5:
+                    powerup.getStyleClass().add("powerup_Pcs");
+                    break;
+                case 6:
+                    powerup.getStyleClass().add("powerup_Heizung");
+                    break;
+                case 7:
+                    powerup.getStyleClass().add("powerup_Klimaanlage");
+                    break;
+                case 8:
+                    powerup.getStyleClass().add("powerup_WCs");
+                    break;
+                case 9:
+                    powerup.getStyleClass().add("powerup_Klangbruecke");
+                    break;
+                case 10:
+                    powerup.getStyleClass().add("powerup_Russische_Reviews");
+                    break;
+
+            }
+
+        }
+
+
+
+        grid_powerups.add(label_powerups1,0,0);
         label_powerups1.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_powerups1, 0.0);
         AnchorPane.setRightAnchor(label_powerups1, 0.0);
@@ -399,7 +403,6 @@ public class Main extends Application {
         grid_stop.setAlignment(Pos.CENTER);
         grid_stop.setHgap(10);
         btn_exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent event) {
                 System.exit(0);
             }
@@ -411,4 +414,5 @@ public class Main extends Application {
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         return scene1;
     }
+
 }
