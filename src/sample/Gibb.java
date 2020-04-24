@@ -18,15 +18,11 @@ public class Gibb {
                          Methods
     ------------------------------------------------*/
     public void click() {
-
-    }
-
-    public void calcMoneyPerClick() {
-
+        balance = balance + (moneyPerClick*multiplier);
     }
 
     public void addMoneyPerSecond() {
-        balance = balance + (moneyPerClick*multiplier);
+
     }
 
     /*------------------------------------------------
