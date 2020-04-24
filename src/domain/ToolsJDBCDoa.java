@@ -26,7 +26,9 @@ public class ToolsJDBCDoa {
             ps = con.prepareStatement(sql);
             ps.setString(1,name);
             rs = ps.executeQuery();
-            ID_Tools = rs.getInt("ID_Tools");
+            if (rs.next()) {
+                ID_Tools = rs.getInt("ID_Tools");
+            }
             closeConnection();
             rs.close();
             ps.close();
@@ -40,14 +42,14 @@ public class ToolsJDBCDoa {
     public List<Tools> loadTools() {
         List<Tools> all = new ArrayList<>();
 
-        String sql = "Select * from Tools";
+        String sql = "Select Name, Price, Level, Status, MoneyPerSecond, PricePerLevel from Tools join User_Tools on ID_Tools=Tools_ID";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("ID_Tools");
-                all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), 0, false,rs.getLong("MoneyPerSecond"), 0, rs.getLong("PricePerLevel")));
+                //long moneyPerSecond = rs.getInt("Level") * rs.getLong("MoneyPerSecond");
+                all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), rs.getLong("moneyPerSecond"), 0, rs.getLong("PricePerLevel")));
             }
             closeConnection();
             rs.close();
@@ -83,14 +85,16 @@ public class ToolsJDBCDoa {
     //calculate the multiplier for a tool
     public int calcMultiplier(int ID_Tools, String username) {
         int multiplier = 0;
-        String sql = "Select Multiplier from Upgrades join User_Upgrades on ID_Tools=Tools_ID where Status = true && ID_Tools = ? && Username = ?";
+        String sql = "Select Multiplier from Tools join Upgrades on ID_Tools=Tools_ID join User_Upgrades on ID_Upgrades=Upgrades_ID join User on ID_User=User_ID where Status = true && ID_Tools = ? && Username = ?";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1,ID_Tools);
             ps.setString(2,username);
             rs = ps.executeQuery();
-            multiplier = rs.getInt("Multiplier");
+            if (rs.next()) {
+                multiplier = rs.getInt("Multiplier");
+            }
             closeConnection();
             rs.close();
             ps.close();

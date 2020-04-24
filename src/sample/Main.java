@@ -33,6 +33,12 @@ public class Main extends Application {
     TextField username_login, username_registration;
     PasswordField password_login, password_registration1, password_registration2;
 
+    /*-----------------------------------
+          create Objects from JDBC's
+    -----------------------------------*/
+    UserJDBCDoa User = new UserJDBCDoa();
+    UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
+    ToolsJDBCDoa Tools = new ToolsJDBCDoa();
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -72,8 +78,15 @@ public class Main extends Application {
                         label_login_verification.setTextFill(Color.web("red"));
                         label_login_verification.setFont(Font.font("Helvetica", 12));
                     } else {
-                        UserJDBCDoa User = new UserJDBCDoa();
                         if (User.checkPassword(username_login.getText(), password_login.getText())) {
+                            for (Tools tool : Tools.loadTools()) {
+                                if (tool.isStatus() == true) {
+                                    //tool.loadMoneyPerSecond();
+                                    //tool.loadMultiplier();
+                                    System.out.println(tool.getName()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier()+" status "+tool.isStatus());
+                                }
+
+                            }
                             fenster.setScene(scene1);
                             fenster.show();
                         } else {
@@ -146,9 +159,6 @@ public class Main extends Application {
                         label_registration_verification.setFont(Font.font("Helvetica", 12));
                     }
                     else if(password_registration1.getText().equals(password_registration2.getText())){
-                        UserJDBCDoa User = new UserJDBCDoa();
-                        UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
-                        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
                         if (User.checkUsername(username_registration.getText())) {
                             User.registrationUser(username_registration.getText(), password_registration1.getText(), 0);
                             int User_ID = User.getUserID(username_registration.getText());
@@ -346,13 +356,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        /*ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-        for (Tools tool : Tools.loadTools()) {
-            if (tool.isStatus() == true) {
-                tool.loadMoneyPerSecond();
-                tool.loadMultiplier();
-            }
-            System.out.println(tool.getName()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier());
-        }*/
+        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+
     }
 }
