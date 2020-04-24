@@ -85,8 +85,8 @@ public class Main extends Application {
                         if (User.checkPassword(username_login.getText(), password_login.getText())) {
                             for (Tools tool : Tools.loadTools(username_login.getText())) {
                                 if (tool.isStatus() == true) {
-                                    tool.loadMoneyPerSecond();
                                     tool.loadMultiplier();
+                                    tool.loadMoneyPerSecond();
                                     System.out.println(tool.getName()+" Level "+tool.getLevel()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier()+" status "+tool.isStatus());
                                 }
 
@@ -237,7 +237,6 @@ public class Main extends Application {
             if(iButFloat / 5 % 1 == 0){
                 row++;
             }
-            System.out.println(Upgrades.loadUpgrades().get(i).getName());
             Button powerup = new Button(Upgrades.loadUpgrades().get(i).getName());
             powerup.setPrefWidth(80);
             powerup.setPrefHeight(80);
@@ -340,7 +339,39 @@ public class Main extends Application {
         for (int i = 0; i < Tools.loadTools(username).size(); i++) {
             Button toolButton = new Button(Tools.loadTools(username_login.getText()).get(i).getName());
             grid_tools.add(toolButton,0,i+1);
-            toolButton.getStyleClass().add("btn_tool");
+            switch (Tools.loadTools(username).get(i).getToolID()){
+                case 1:
+                    toolButton.getStyleClass().add("powerup_Smartlearn");
+                    break;
+                case 2:
+                    toolButton.getStyleClass().add("powerup_VMs");
+                    break;
+                case 3:
+                    toolButton.getStyleClass().add("powerup_Lehrer");
+                    break;
+                case 4:
+                    toolButton.getStyleClass().add("powerup_Kantine");
+                    break;
+                case 5:
+                    toolButton.getStyleClass().add("powerup_Pcs");
+                    break;
+                case 6:
+                    toolButton.getStyleClass().add("powerup_Heizung");
+                    break;
+                case 7:
+                    toolButton.getStyleClass().add("powerup_Klimaanlage");
+                    break;
+                case 8:
+                    toolButton.getStyleClass().add("powerup_WCs");
+                    break;
+                case 9:
+                    toolButton.getStyleClass().add("powerup_Klangbruecke");
+                    break;
+                case 10:
+                    toolButton.getStyleClass().add("powerup_Russische_Reviews");
+                    break;
+
+            }
             toolsButton.add(toolButton);
 
             Label toolLabelName = new Label(Tools.loadTools(username_login.getText()).get(i).getName());
@@ -358,19 +389,7 @@ public class Main extends Application {
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
         }
-        /*btn_tool1 = new Button();
-        label_tool1 = new Label("Klangbrücke");
-        label_level1 = new Label("0");
-        label_tool_price = new Label(10 +" $");
-        label_tools.getStyleClass().add("label_tools");
-        grid_tools.add(btn_tool1, 0,1);
-        btn_tool1.getStyleClass().add("btn_tool");
-        grid_tools.add(label_tool1, 1,1);
-        label_tool1.getStyleClass().add("label_tool_name");
-        grid_tools.add(label_level1, 2,1);
-        label_level1.getStyleClass().add("label_level");
-        grid_tools.add(label_tool_price, 1,1);
-        label_tool_price.getStyleClass().add("label_tool_price");*/
+
         grid_tools.add(label_tools, 0,0);
         label_tools.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_tools, 0.0);

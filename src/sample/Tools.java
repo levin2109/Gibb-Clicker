@@ -36,7 +36,7 @@ public class Tools {
     //load the Money per Second for the Player when he is back in the game
     public void loadMoneyPerSecond() {
         int ID_Tools = Tools.getToolID(this.name);
-        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools, "cedic3");
+        this.moneyPerSecond = Tools.calcMoneyPerSecond(ID_Tools, "cedic3") * multiplier;
     }
 
     //load the Multiplier for the Player when he is back in the game
@@ -44,6 +44,11 @@ public class Tools {
         int ID_Tools = Tools.getToolID(this.name);
         this.multiplier = Tools.calcMultiplier(ID_Tools, "cedic3");
     }
+
+    public int getToolID() {
+        return Tools.getToolID(this.name);
+    }
+
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/

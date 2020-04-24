@@ -20,7 +20,7 @@ public class ConnectionFactory {
     public static ConnectionFactory getInstance(){
         if (connectionFactory == null){
 
-            connectionFactory = new ConnectionFactory("jdbc:mysql://localhost/Gibb_Clicker", "root", "");
+            connectionFactory = new ConnectionFactory("jdbc:mysql://localhost:3306/Gibb_Clicker", "root", "");
         }
         return connectionFactory;
     }
