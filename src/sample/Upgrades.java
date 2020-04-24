@@ -29,6 +29,7 @@ public class Upgrades {
         if (object.balance > price) {
             long balance = object.getMoney();
             object.setMoney(balance - price);
+            activate();
         } else {
             System.out.println("Du hast zu wenig Geld!");
         }
