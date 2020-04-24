@@ -21,7 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Main extends Application {
+    String username;
     Stage fenster;
     Scene login, scene1, registartion;
     Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_tool1, label_level1, label_tool_price,
@@ -79,15 +84,16 @@ public class Main extends Application {
                         label_login_verification.setFont(Font.font("Helvetica", 12));
                     } else {
                         if (User.checkPassword(username_login.getText(), password_login.getText())) {
-                            for (Tools tool : Tools.loadTools()) {
+                            for (Tools tool : Tools.loadTools(username_login.getText())) {
                                 if (tool.isStatus() == true) {
-                                    //tool.loadMoneyPerSecond();
-                                    //tool.loadMultiplier();
-                                    System.out.println(tool.getName()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier()+" status "+tool.isStatus());
+                                    tool.loadMoneyPerSecond();
+                                    tool.loadMultiplier();
+                                    System.out.println(tool.getName()+" Level "+tool.getLevel()+" Money: "+tool.getMoneyPerSecond()+" Multiplier "+tool.getMultiplier()+" status "+tool.isStatus());
                                 }
 
                             }
-                            fenster.setScene(scene1);
+                            username = username_login.getText();
+                            fenster.setScene(scene1());
                             fenster.show();
                         } else {
                             label_login_verification.setText("Der Name und/oder Passwort sind falsch");
@@ -169,7 +175,7 @@ public class Main extends Application {
                                 Upgrades.registrateUpgrades(User_ID, i, false);
                             }
                             System.out.println(User_ID);
-                            fenster.setScene(scene1);
+                            fenster.setScene(scene1());
                             fenster.show();
                         } else {
                             label_registration_verification.setText("Der Benutzername existiert bereits.");
@@ -189,6 +195,25 @@ public class Main extends Application {
             }
         });
 
+
+
+        login = new Scene(grid_login, 300,230);
+        registartion = new Scene(grid_registration, 340, 250);
+        fenster = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Gibb Clicker");
+        primaryStage.setScene(login);
+        primaryStage.show();
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+
+    }
+
+    public Scene scene1() {
 
         /* Grids */
         GridPane grid_main = new GridPane();
@@ -302,11 +327,37 @@ public class Main extends Application {
 
         /* Tools */
         label_tools = new Label("Tools");
-        btn_tool1 = new Button();
+        List<Button> toolsButton = new ArrayList<>();
+        List<Label> toolsLabelName = new ArrayList<>();
+        List<Label> toolsLabelLevel = new ArrayList<>();
+        List<Label> toolsLabelPrice = new ArrayList<>();
+
+        //Alle Tools generieren
+        for (int i = 0; i < Tools.loadTools(username).size(); i++) {
+            Button toolButton = new Button(Tools.loadTools(username_login.getText()).get(i).getName());
+            grid_tools.add(toolButton,0,i+1);
+            toolButton.getStyleClass().add("btn_tool");
+            toolsButton.add(toolButton);
+
+            Label toolLabelName = new Label(Tools.loadTools(username_login.getText()).get(i).getName());
+            grid_tools.add(toolLabelName, 1,i+1);
+            toolLabelName.getStyleClass().add("label_tool_name");
+            toolsLabelName.add(toolLabelName);
+
+            Label toolLabelLevel = new Label(Integer.toString(Tools.loadTools(username_login.getText()).get(i).getLevel()));
+            grid_tools.add(toolLabelLevel,2,i+1);
+            toolLabelLevel.getStyleClass().add("label_level");
+            toolsLabelLevel.add(toolLabelLevel);
+
+            Label toolLabelPrice = new Label(Long.toString(Tools.loadTools(username_login.getText()).get(i).getPrice()));
+            grid_tools.add(toolLabelPrice,1,i+1);
+            toolLabelPrice.getStyleClass().add("label_tool_price");
+            toolsLabelPrice.add(toolLabelPrice);
+        }
+        /*btn_tool1 = new Button();
         label_tool1 = new Label("Klangbrücke");
         label_level1 = new Label("0");
         label_tool_price = new Label(10 +" $");
-        grid_tools.add(label_tools, 0,0);
         label_tools.getStyleClass().add("label_tools");
         grid_tools.add(btn_tool1, 0,1);
         btn_tool1.getStyleClass().add("btn_tool");
@@ -315,7 +366,8 @@ public class Main extends Application {
         grid_tools.add(label_level1, 2,1);
         label_level1.getStyleClass().add("label_level");
         grid_tools.add(label_tool_price, 1,1);
-        label_tool_price.getStyleClass().add("label_tool_price");
+        label_tool_price.getStyleClass().add("label_tool_price");*/
+        grid_tools.add(label_tools, 0,0);
         label_tools.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_tools, 0.0);
         AnchorPane.setRightAnchor(label_tools, 0.0);
@@ -356,20 +408,7 @@ public class Main extends Application {
 
 
         scene1 = new Scene(grid_main, 1500, 775);
-        login = new Scene(grid_login, 300,230);
-        registartion = new Scene(grid_registration, 340, 250);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        fenster = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Gibb Clicker");
-        primaryStage.setScene(login);
-        primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
-        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-
+        return scene1;
     }
 }
