@@ -1,7 +1,7 @@
 package sample;
 
 public class Gibb {
-    public static long money;
+    public static long balance;
     private long moneyPerClick;
     private int multiplier;
 
@@ -9,8 +9,8 @@ public class Gibb {
                         Constructor
     ------------------------------------------------*/
 
-    public Gibb(long money, long moneyPerClick) {
-        this.money = money;
+    public Gibb(long balance, long moneyPerClick) {
+        this.balance = balance;
         this.moneyPerClick = moneyPerClick;
     }
 
@@ -18,16 +18,22 @@ public class Gibb {
                          Methods
     ------------------------------------------------*/
     public void click() {
-        money = money + (moneyPerClick*multiplier);
-    }
-    public void addMoney() {
 
     }
+
+    public void calcMoneyPerClick() {
+
+    }
+
+    public void addMoneyPerSecond() {
+        balance = balance + (moneyPerClick*multiplier);
+    }
+
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/
     public static long getMoney() {
-        return money;
+        return balance;
     }
 
     public long getMoneyPerClick() {
@@ -46,7 +52,7 @@ public class Gibb {
     }
 
     public static void setMoney(long money) {
-        Gibb.money = money;
+        Gibb.balance = money;
     }
 
     public void setMultiplier(int multiplier) {

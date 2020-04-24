@@ -26,7 +26,7 @@ public class Upgrades {
     }
 
     public void buy(Gibb object) {
-        if (object.money > price) {
+        if (object.balance > price) {
             long balance = object.getMoney();
             object.setMoney(balance - price);
         } else {
