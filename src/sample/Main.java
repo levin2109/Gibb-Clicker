@@ -11,16 +11,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -220,10 +218,12 @@ public class Main extends Application {
         GridPane grid_tools = new GridPane();
         GridPane grid_powerups = new GridPane();
         GridPane grid_stop = new GridPane();
+        ScrollPane scroll_tools = new ScrollPane();
         grid_main.setMinWidth(1500);
         grid_main.setMaxWidth(1500);
         grid_main.setMaxHeight(750);
         grid_main.setMinHeight(750);
+
 
 
 
@@ -335,6 +335,7 @@ public class Main extends Application {
         List<Label> toolsLabelLevel = new ArrayList<>();
         List<Label> toolsLabelPrice = new ArrayList<>();
 
+
         //Alle Tools generieren
         for (int i = 0; i < Tools.loadTools(username).size(); i++) {
             Button toolButton = new Button(Tools.loadTools(username_login.getText()).get(i).getName());
@@ -388,6 +389,12 @@ public class Main extends Application {
             grid_tools.add(toolLabelPrice,1,i+1);
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
+
+            toolButton.setPrefHeight(80);
+            toolButton.setPrefWidth(80);
+            scroll_tools.setContent(grid_tools);
+            scroll_tools.setPrefHeight(700);
+            scroll_tools.setPrefWidth(370);
         }
 
         grid_tools.add(label_tools, 0,0);
@@ -414,8 +421,8 @@ public class Main extends Application {
         grid_main.add(label_title, 0, 0);
         grid_main.add(grid_powerups, 0,1);
         grid_main.add(grid_center, 1,1);
-        grid_main.add(grid_tools, 2, 1);
         grid_main.add(grid_stop,1,2);
+        grid_main.add(scroll_tools,2,1);
         grid_stop.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(grid_stop, 0.0);
         AnchorPane.setRightAnchor(grid_stop, 0.0);
