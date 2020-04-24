@@ -10,13 +10,6 @@
 .label_tools{
     -fx-pref-width: 400px;
 }
-.btn_tool{
-    -fx-pref-width: 200px;
-    -fx-pref-height: 90px;
-    -fx-background-image: url("/sample/Klangbruecke.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-}
 .label_tool_name{
     -fx-pref-width: 200px;
     -fx-alignment: center;
