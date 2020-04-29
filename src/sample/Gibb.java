@@ -2,6 +2,8 @@ package sample;
 
 import domain.UserJDBCDoa;
 
+import java.util.List;
+
 public class Gibb {
     public static double balance;
     private long moneyPerClick;
@@ -31,6 +33,18 @@ public class Gibb {
 
     }
 
+    public double calcMoneyPerSecond(List<Tools> toolsList) {
+        double money = 0;
+        for (Tools tool : toolsList) {
+            money = money + tool.getMoneyPerSecond();
+        }
+        return money;
+    }
+
+    public double addMoney(List<Tools> toolsList) {
+        setBalance(calcMoneyPerSecond(toolsList)/5);
+        return calcMoneyPerSecond(toolsList) / 5;
+    }
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/

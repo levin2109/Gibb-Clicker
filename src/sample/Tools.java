@@ -79,9 +79,14 @@ public class Tools {
     public String getName() {
         return name;
     }
+
+    public long getPricePerLevel() {
+        return pricePerLevel;
+    }
+
     /*------------------------------------------------
-                          Setter
-    ------------------------------------------------*/
+                              Setter
+        ------------------------------------------------*/
     public void setMultiplier(int multiplier) {
         this.multiplier = multiplier;
     }
