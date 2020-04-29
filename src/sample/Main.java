@@ -3,8 +3,10 @@ package sample;
 import domain.ToolsJDBCDoa;
 import domain.UpgradesJDBCDoa;
 import domain.UserJDBCDoa;
+
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -47,6 +49,7 @@ public class Main {
         }).start();
     }
 
+
     public static void mainWork() {
 
         System.out.println("main");
@@ -63,10 +66,5 @@ public class Main {
                 }
             }
         }, 200, 500);
-
     }
-
-
-
-
 }
