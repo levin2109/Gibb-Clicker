@@ -359,6 +359,13 @@ public class GUI extends Application {
         grid_center.setMaxHeight(700);
         grid_center.setMinHeight(700);
 
+        //function for the GIBB button
+        btn_Gibb.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                game.click();
+            }
+        });
 
 
         /* Tools */
@@ -423,7 +430,70 @@ public class GUI extends Application {
             grid_tools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
+        }
 
+        //make the function for every tool
+        for (Button btn : toolsButton) {
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String c = String.valueOf(btn.getStyleClass());
+                    System.out.println(c);
+                    switch (c) {
+                        case "button powerup_Smartlearn":
+                            toolsList.get(0).buy(game);
+                            toolsLabelLevel.get(0).setText(String.valueOf(toolsList.get(0).getLevel()));
+                            toolsLabelPrice.get(0).setText(String.valueOf(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            break;
+                        case "button powerup_VMs":
+                            toolsList.get(1).buy(game);
+                            toolsLabelLevel.get(1).setText(String.valueOf(toolsList.get(1).getLevel()));
+                            toolsLabelPrice.get(1).setText(String.valueOf(toolsList.get(1).getPrice()+(toolsList.get(1).getPricePerLevel()*toolsList.get(1).getLevel())));
+                            break;
+                        case "button powerup_Lehere":
+                            toolsList.get(2).buy(game);
+                            toolsLabelLevel.get(2).setText(String.valueOf(toolsList.get(2).getLevel()));
+                            toolsLabelPrice.get(2).setText(String.valueOf(toolsList.get(2).getPrice()+(toolsList.get(2).getPricePerLevel()*toolsList.get(2).getLevel())));
+                            break;
+                        case "buttno powerup_Kantine":
+                            toolsList.get(3).buy(game);
+                            toolsLabelLevel.get(3).setText(String.valueOf(toolsList.get(3).getLevel()));
+                            toolsLabelPrice.get(3).setText(String.valueOf(toolsList.get(3).getPrice()+(toolsList.get(3).getPricePerLevel()*toolsList.get(3).getLevel())));
+                            break;
+                        case "button powerup_PCs":
+                            toolsList.get(4).buy(game);
+                            toolsLabelLevel.get(4).setText(String.valueOf(toolsList.get(4).getLevel()));
+                            toolsLabelPrice.get(4).setText(String.valueOf(toolsList.get(4).getPrice()+(toolsList.get(4).getPricePerLevel()*toolsList.get(4).getLevel())));
+                            break;
+                        case "button powerup_Heizung":
+                            toolsList.get(5).buy(game);
+                            toolsLabelLevel.get(5).setText(String.valueOf(toolsList.get(5).getLevel()));
+                            toolsLabelPrice.get(5).setText(String.valueOf(toolsList.get(5).getPrice()+(toolsList.get(5).getPricePerLevel()*toolsList.get(5).getLevel())));
+                            break;
+                        case "button powerup_Klimaanlage":
+                            toolsList.get(6).buy(game);
+                            toolsLabelLevel.get(6).setText(String.valueOf(toolsList.get(6).getLevel()));
+                            toolsLabelPrice.get(6).setText(String.valueOf(toolsList.get(6).getPrice()+(toolsList.get(6).getPricePerLevel()*toolsList.get(6).getLevel())));
+                            break;
+                        case "button powerup_WCs":
+                            toolsList.get(7).buy(game);
+                            toolsLabelLevel.get(7).setText(String.valueOf(toolsList.get(7).getLevel()));
+                            toolsLabelPrice.get(7).setText(String.valueOf(toolsList.get(7).getPrice()+(toolsList.get(7).getPricePerLevel()*toolsList.get(7).getLevel())));
+                            break;
+                        case "button powerup_Klangbrueche":
+                            toolsList.get(8).buy(game);
+                            toolsLabelLevel.get(8).setText(String.valueOf(toolsList.get(8).getLevel()));
+                            toolsLabelPrice.get(8).setText(String.valueOf(toolsList.get(8).getPrice()+(toolsList.get(8).getPricePerLevel()*toolsList.get(8).getLevel())));
+                            break;
+                        case "button powerup_Russische_Reviews":
+                            toolsList.get(9).buy(game);
+                            toolsLabelLevel.get(9).setText(String.valueOf(toolsList.get(9).getLevel()));
+                            toolsLabelPrice.get(9).setText(String.valueOf(toolsList.get(9).getPrice()+(toolsList.get(9).getPricePerLevel()*toolsList.get(9).getLevel())));
+                            break;
+                        default:
+                    }
+                }
+            });
         }
 
         grid_tools.add(label_tools, 0, 0);
