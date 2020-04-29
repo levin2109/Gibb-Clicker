@@ -24,18 +24,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends Application {
+
+    /*-----------------------------------------------------
+                        GUI Bauteile
+    ------------------------------------------------------*/
     static List<Tools> toolsList = new ArrayList<>();
     String username;
-    //Stage fenster;
+    Stage window;
     Scene login, scene1, registartion;
-    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_tool1, label_level1, label_tool_price,
-            label_login_username, label_login_password, label_login_title, label_login_verification,
+    Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_login_username, label_login_password, label_login_title, label_login_verification,
             label_registration_username, label_registration_password1, label_registration_password2, label_registration_title, label_registration_verification;
-    Button btn_powerups1, btn_powerups2, btn_powerups3, btn_powerups4, btn_powerups5, btn_powerups6, btn_powerups7,
-            btn_powerups8, btn_powerups9, btn_powerups10, btn_powerups11, btn_powerups12, btn_Gibb, btn_tool1, btn_save, btn_exit,
+    Button  btn_Gibb, btn_save, btn_exit,
             btn_login, btn_login_registration, btn_registration, btn_registration_login;
     TextField username_login, username_registration;
     PasswordField password_login, password_registration1, password_registration2;
+
 
     /*-----------------------------------
           create Objects from JDBC's
@@ -44,9 +47,23 @@ public class GUI extends Application {
     UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
     static Gibb game = new Gibb(0);
+    Main main = new Main();
 
+    /*---------------------------------
+                  methods
+     --------------------------------*/
     public void startApplication(String[] args) {
         launch(args);
+    }
+
+    public void setScene() {
+        if (scene1 == null) {
+            Scene scene = scene1();
+            window.setScene(scene);
+        } else {
+            window.setScene(scene1);
+        }
+        window.show();
     }
 
     public void start(Stage primaryStage) throws Exception {
@@ -317,7 +334,7 @@ public class GUI extends Application {
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
-        label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + " CHF pro Sekunde");
+
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -463,4 +480,25 @@ public class GUI extends Application {
     public List<Tools> getToolsList() {
         return toolsList;
     }
+
+    public void updateLabels() {
+        System.out.println("updaze");
+        //System.out.println(label_balance.getT);
+        /*if (label_balance == null) {
+            System.out.println("methode");
+            label_balance = new Label(game.getBalance() + " $");
+            int balance = (int) game.getBalance();
+            int moneyPerSecond = (int) game.calcMoneyPerSecond(toolsList);
+            label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
+        }*/
+        if (label_balance != null) {
+            System.out.println("methode2");
+            int balance = (int) game.getBalance();
+            label_balance.setText(balance + " $");
+            int moneyPerSecond = (int) game.calcMoneyPerSecond(toolsList);
+            label_moneyPerSecond.setText(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
+            //setScene();
+        }
+    }
+
 }

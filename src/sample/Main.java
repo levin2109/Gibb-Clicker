@@ -3,10 +3,8 @@ package sample;
 import domain.ToolsJDBCDoa;
 import domain.UpgradesJDBCDoa;
 import domain.UserJDBCDoa;
-
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -20,6 +18,7 @@ public class Main {
     static ToolsJDBCDoa Tools = new ToolsJDBCDoa();
     static Gibb game = new Gibb(0);
     static GUI gui = new GUI();
+    static boolean labelSet;
 
 
     public static void main(String[] args) {
@@ -37,7 +36,7 @@ public class Main {
             }
         }).start();
 
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -46,9 +45,8 @@ public class Main {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
-
 
     public static void mainWork() {
 
@@ -59,12 +57,14 @@ public class Main {
             public void run() {
                 toolsList = gui.getToolsList();
                 if (toolsList.size() >= 1) {
-                    double trouble = toolsList.get(1).getMoneyPerSecond();
-                    System.out.println(trouble);
                     game.addMoney(toolsList);
-                    System.out.println(game.getBalance());
+                    gui.updateLabels();
+                    System.out.println("hobla");
                 }
             }
         }, 200, 500);
+
     }
+
+
 }
