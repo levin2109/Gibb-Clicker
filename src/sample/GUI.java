@@ -34,7 +34,7 @@ public class GUI extends Application {
     Scene login, scene1, registartion;
     Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_login_username, label_login_password, label_login_title, label_login_verification,
             label_registration_username, label_registration_password1, label_registration_password2, label_registration_title, label_registration_verification;
-    Button  btn_Gibb, btn_save, btn_exit,
+    Button btn_Gibb, btn_save, btn_exit,
             btn_login, btn_login_registration, btn_registration, btn_registration_login;
     TextField username_login, username_registration;
     PasswordField password_login, password_registration1, password_registration2;
@@ -269,10 +269,10 @@ public class GUI extends Application {
             grid_powerups.add(powerup, i % 5, row);
             powerupsList.add(powerup);
             iButFloat = iButFloat + 1;
-            String tooltip_text_name = "Name: "+Upgrades.loadUpgrades().get(i).getName();
-            String tooltip_text_price = "Preis: "+ NumberFormat.getIntegerInstance().format(Upgrades.loadUpgrades().get(i).getPrice()) + " CHF";
-            String tooltip_text_multiplier = "Dein/e "+ Tools.getToolName(Upgrades.loadUpgrades().get(i).getTool_ID())+ " nimmt "+ Upgrades.loadUpgrades().get(i).getMultiplier()+"-mal so viel Geld ein.";
-            Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltip_text_name+ "\n"+ tooltip_text_price+ "\n"+ tooltip_text_multiplier).prefWidth(300).wrapText(true).build();
+            String tooltip_text_name = "Name: " + Upgrades.loadUpgrades().get(i).getName();
+            String tooltip_text_price = "Preis: " + NumberFormat.getIntegerInstance().format(Upgrades.loadUpgrades().get(i).getPrice()) + " CHF";
+            String tooltip_text_multiplier = "Dein/e " + Tools.getToolName(Upgrades.loadUpgrades().get(i).getTool_ID()) + " nimmt " + Upgrades.loadUpgrades().get(i).getMultiplier() + "-mal so viel Geld ein.";
+            Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltip_text_name + "\n" + tooltip_text_price + "\n" + tooltip_text_multiplier).prefWidth(300).wrapText(true).build();
             powerup.setTooltip(tooltipPowerup);
             switch (Upgrades.loadUpgrades().get(i).getTool_ID()) {
                 case 1:
@@ -325,7 +325,7 @@ public class GUI extends Application {
         scroll_powerups.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scroll_powerups.setStyle("-fx-background-color: #FFFFFF;");
         grid_powerups.setStyle("-fx-background-color: #FFFFFF;");
-        grid_powerups.setPadding(new Insets(0,20,0,0));
+        grid_powerups.setPadding(new Insets(0, 20, 0, 0));
 
 
         /* Center */
@@ -334,7 +334,7 @@ public class GUI extends Application {
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
-
+        label_moneyPerSecond = new Label(priceGeneratorLong(game.calcMoneyPerSecond(getToolsList())) + " pro Sekunde");
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -457,8 +457,8 @@ public class GUI extends Application {
         grid_main.add(grid_center, 1, 1);
         grid_main.add(grid_tools, 2, 1);
         grid_main.add(grid_stop, 1, 2);
-        grid_main.add(scroll_tools,2,1);
-        grid_main.add(scroll_powerups,0,1);
+        grid_main.add(scroll_tools, 2, 1);
+        grid_main.add(scroll_powerups, 0, 1);
         grid_stop.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(grid_stop, 0.0);
         AnchorPane.setRightAnchor(grid_stop, 0.0);
@@ -501,4 +501,72 @@ public class GUI extends Application {
         }
     }
 
+    public String priceGeneratorLong(double number) {
+        String result = "";
+        if (number > 1000000 && number < 10000000) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+"."+array_number[1]+array_number[2]+array_number[3]+" Millionen CHF";
+        }
+        else if (number > 1000 && number < 10000) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+"'"+array_number[1]+array_number[2]+array_number[3]+ " CHF";
+        }
+        else if (number > 10000 && number < 100000) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+array_number[1]+"'"+array_number[2]+array_number[3]+array_number[4]+ " CHF";
+        }
+        else if (number > 100000 && number < 1000000) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+array_number[1]+array_number[2]+array_number[3]+array_number[4]+array_number[5]+ " CHF";
+        }
+        else if (number > 10000000 && number < 100000000) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+array_number[1]+"."+array_number[2]+array_number[3]+" Millionen CHF";
+        }
+        else if (number > 100000000 && number < 1000000000) {
+            System.out.println(number);
+            result = Double.toString(number);
+            System.out.println(result);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            System.out.println(array_number);
+            result = array_number[0]+array_number[1]+array_number[2]+"."+array_number[3]+" Millionen CHF";
+        }
+        else if (number > 1000000000 && number < 2147483647) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0]+"."+array_number[1]+array_number[2]+array_number[3]+" Milliarden CHF";
+        }
+        else{
+            result = Double.toString(number)+" CHF";
+        }
+
+        return (result);
+
+    }
 }

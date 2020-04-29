@@ -30,61 +30,61 @@
 }
 .powerup_Smartlearn{
     -fx-background-image: url("/sample/Icons/Smartlearn.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Kantine{
     -fx-background-image: url("/sample/Icons/Kantine.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Heizung{
     -fx-background-image: url("/sample/Icons/Heizung.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Klimaanlage{
     -fx-background-image: url("/sample/Icons/Klimaanlage.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Lehrer{
     -fx-background-image: url("/sample/Icons/Lehrer.png");
-    -fx-background-size: 80px;
+    -fx-background-size: 70px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Pcs{
     -fx-background-image: url("/sample/Icons/Pcs.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_VMs{
     -fx-background-image: url("/sample/Icons/VMs.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_WCs{
     -fx-background-image: url("/sample/Icons/WCs.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Klangbruecke{
     -fx-background-image: url("/sample/Icons/Klangbruecke.png");
-    -fx-background-size: 80px;
+    -fx-background-size: 70px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
 .powerup_Russische_Reviews{
     -fx-background-image: url("/sample/Icons/Russische_Reviews.png");
-    -fx-background-size: 70px;
+    -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }

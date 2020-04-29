@@ -21,7 +21,7 @@ public class UpgradesJDBCDoa {
     public List<Upgrades> loadUpgrades() {
         List<Upgrades> all = new ArrayList<>();
 
-        String sql = "Select * from Upgrades";
+        String sql = "Select * from Upgrades order by price asc";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
