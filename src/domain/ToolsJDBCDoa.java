@@ -81,6 +81,26 @@ public class ToolsJDBCDoa {
         }
         return all;
     }
+    //Get the toolname with the tool id
+    public String getToolName(int ID_Tool) {
+        String toolname = "";
+        String sql = "Select Name from Tools where ID_Tools = ?";
+        try {
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,ID_Tool);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                toolname = rs.getString("Name");
+            }
+            closeConnection();
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toolname;
+    }
 
     //calculate the moneyPerSecond for a tool
     public double calcMoneyPerSecond(int ID_Tools, String username) {

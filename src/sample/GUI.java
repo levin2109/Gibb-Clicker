@@ -11,16 +11,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.nio.file.attribute.UserPrincipal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +127,7 @@ public class GUI extends Application {
                 }
             }
         });
+
         btn_login_registration.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (event.getSource() == btn_login_registration) {
@@ -238,6 +238,8 @@ public class GUI extends Application {
         GridPane grid_tools = new GridPane();
         GridPane grid_powerups = new GridPane();
         GridPane grid_stop = new GridPane();
+        ScrollPane scroll_tools = new ScrollPane();
+        ScrollPane scroll_powerups = new ScrollPane();
         grid_main.setMinWidth(1500);
         grid_main.setMaxWidth(1500);
         grid_main.setMaxHeight(750);
@@ -255,12 +257,23 @@ public class GUI extends Application {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
             }
-            Button powerup = new Button(Upgrades.loadUpgrades().get(i).getName());
-            powerup.setPrefWidth(80);
-            powerup.setPrefHeight(80);
+            // Select Name from Tools
+            // join Upgrades on ID_Tool = Tool_ID
+            // where Tool_ID = ID_Tool
+
+            Button powerup = new Button();
+            powerup.setMinWidth(70);
+            powerup.setMinHeight(70);
+            grid_powerups.setHgap(9);
+            grid_powerups.setVgap(9);
             grid_powerups.add(powerup, i % 5, row);
             powerupsList.add(powerup);
             iButFloat = iButFloat + 1;
+            String tooltip_text_name = "Name: "+Upgrades.loadUpgrades().get(i).getName();
+            String tooltip_text_price = "Preis: "+ NumberFormat.getIntegerInstance().format(Upgrades.loadUpgrades().get(i).getPrice()) + " CHF";
+            String tooltip_text_multiplier = "Dein/e "+ Tools.getToolName(Upgrades.loadUpgrades().get(i).getTool_ID())+ " nimmt "+ Upgrades.loadUpgrades().get(i).getMultiplier()+"-mal so viel Geld ein.";
+            Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltip_text_name+ "\n"+ tooltip_text_price+ "\n"+ tooltip_text_multiplier).prefWidth(300).wrapText(true).build();
+            powerup.setTooltip(tooltipPowerup);
             switch (Upgrades.loadUpgrades().get(i).getTool_ID()) {
                 case 1:
                     powerup.getStyleClass().add("powerup_Smartlearn");
@@ -306,9 +319,13 @@ public class GUI extends Application {
         grid_main.setColumnSpan(label_powerups1, 400);
         grid_powerups.setMinWidth(400);
         grid_powerups.setMaxWidth(400);
-        grid_powerups.setMaxHeight(700);
-        grid_powerups.setMinHeight(700);
-
+        scroll_powerups.setContent(grid_powerups);
+        scroll_powerups.setPrefWidth(400);
+        scroll_powerups.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll_powerups.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scroll_powerups.setStyle("-fx-background-color: #FFFFFF;");
+        grid_powerups.setStyle("-fx-background-color: #FFFFFF;");
+        grid_powerups.setPadding(new Insets(0,20,0,0));
 
 
         /* Center */
@@ -317,8 +334,7 @@ public class GUI extends Application {
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
-        label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
-        System.out.println("i");
+
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -355,7 +371,7 @@ public class GUI extends Application {
 
         //Alle Tools generieren
         for (int i = 0; i < Tools.loadTools(username).size(); i++) {
-            Button toolButton = new Button(Tools.loadTools(username_login.getText()).get(i).getName());
+            Button toolButton = new Button();
             grid_tools.add(toolButton, 0, i + 1);
             switch (Tools.loadTools(username).get(i).getToolID()) {
                 case 1:
@@ -391,6 +407,8 @@ public class GUI extends Application {
 
             }
             toolsButton.add(toolButton);
+            toolButton.setPrefWidth(80);
+            toolButton.setPrefHeight(80);
 
             Label toolLabelName = new Label(Tools.loadTools(username_login.getText()).get(i).getName());
             grid_tools.add(toolLabelName, 1, i + 1);
@@ -406,6 +424,7 @@ public class GUI extends Application {
             grid_tools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
+
         }
 
         grid_tools.add(label_tools, 0, 0);
@@ -417,8 +436,12 @@ public class GUI extends Application {
         label_tools.setFont(Font.font("Helvetica", 27));
         grid_tools.setMinWidth(400);
         grid_tools.setMaxWidth(400);
-        grid_tools.setMaxHeight(700);
-        grid_tools.setMinHeight(700);
+        scroll_tools.setContent(grid_tools);
+        scroll_tools.setPrefWidth(400);
+        scroll_tools.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll_tools.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scroll_tools.setStyle("-fx-background-color: #FFFFFF;");
+        grid_tools.setStyle("-fx-background-color: #FFFFFF;");
 
 
 
@@ -434,6 +457,8 @@ public class GUI extends Application {
         grid_main.add(grid_center, 1, 1);
         grid_main.add(grid_tools, 2, 1);
         grid_main.add(grid_stop, 1, 2);
+        grid_main.add(scroll_tools,2,1);
+        grid_main.add(scroll_powerups,0,1);
         grid_stop.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(grid_stop, 0.0);
         AnchorPane.setRightAnchor(grid_stop, 0.0);
