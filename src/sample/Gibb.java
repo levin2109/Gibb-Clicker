@@ -29,8 +29,8 @@ public class Gibb {
         balance = User.getBalance(username);
     }
 
-    public void addMoneyPerSecond() {
-
+    public void addBalance(double amount) {
+        balance = balance + amount;
     }
 
     public double calcMoneyPerSecond(List<Tools> toolsList) {
@@ -42,7 +42,7 @@ public class Gibb {
     }
 
     public double addMoney(List<Tools> toolsList) {
-        setBalance(calcMoneyPerSecond(toolsList)/5);
+        addBalance(calcMoneyPerSecond(toolsList)/5);
         return calcMoneyPerSecond(toolsList) / 5;
     }
     /*------------------------------------------------
