@@ -7,8 +7,6 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main {
     static Stage primaryStage;
@@ -22,10 +20,13 @@ public class Main {
 
 
     public static void main(String[] args) {
+        gui.startApplication(args);
+        //mainWork();
+        /*
         new Thread(new Runnable() {
             @Override
             public void run() {
-                gui.startApplication(args);
+
             }
         }).start();
 
@@ -34,7 +35,7 @@ public class Main {
             public void run() {
                 mainWork();
             }
-        }).start();
+        }).start();*/
 
         /*new Thread(new Runnable() {
             @Override
@@ -48,13 +49,14 @@ public class Main {
         }).start();*/
     }
 
-    public static void mainWork() {
+    /*public static void mainWork() {
 
         System.out.println("main");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("Test");
                 toolsList = gui.getToolsList();
                 if (toolsList.size() >= 1) {
                     game.addMoney(toolsList);
@@ -64,7 +66,8 @@ public class Main {
             }
         }, 200, 500);
 
-    }
+
+    }*/
 
 
 }

@@ -1,54 +1,53 @@
 package domain;
 
+import sample.Tools;
 import sample.Upgrades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class UpgradesJDBCDoa {
+public class SaveJDBCDoa {
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    /*---------------------------------------------
-        Methods for Users (Login & Registration)
-     --------------------------------------------*/
-    //create all upgrade-objects from database
-    public List<Upgrades> loadUpgrades() {
-        List<Upgrades> all = new ArrayList<>();
-
-        String sql = "Select * from Upgrades";
+    /*-----------------------------------------
+                Methods to save
+    -----------------------------------------*/
+    //save all new tool levels
+    public void saveTools(List<Tools> toolsList, int User_ID) {
+        String sql = "Update User_Tools set Level = ? where User_ID = ? and Tools_ID = ?";
         try {
             con = openConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                all.add(new Upgrades(rs.getInt("ID_Upgrades"), rs.getString("Name"), rs.getInt("Tools_ID"), rs.getInt("Multiplier"), rs.getLong("Price"), false));
+            for (Tools tool : toolsList) {
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, tool.getLevel());
+                ps.setInt(2, User_ID);
+                ps.setInt(3, tool.getToolID());
+                ps.execute();
             }
             closeConnection();
-            rs.close();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return all;
     }
 
-    //registrate upgrades
-    public void registrateUpgrades(int User_ID, int Upgrades_ID, boolean status) {
-        String sql = "Insert into User_Upgrades(User_ID, Upgrades_ID, Status) Values (?,?,?)";
+    //save all all new upgrade levels
+    public void saveUpgrades(List<Upgrades> upgradesList, int User_ID) {
+        String sql = "Update User_Upgrades set Status = ? where User_ID = ? and Upgrades_ID = ?";
         try {
-            setForeignKeyChecks0();
             con = openConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, User_ID);
-            ps.setInt(2, Upgrades_ID);
-            ps.setBoolean(3, status);
-            ps.execute();
+            for (Upgrades upgrade : upgradesList) {
+                ps = con.prepareStatement(sql);
+                ps.setBoolean(1, upgrade.isStatus());
+                ps.setInt(2, User_ID);
+                ps.setInt(3, upgrade.getID_Upgrade());
+                ps.execute();
+            }
             closeConnection();
             ps.close();
         } catch (SQLException e) {
@@ -56,12 +55,14 @@ public class UpgradesJDBCDoa {
         }
     }
 
-    //set foreign keys checks 0
-    public void setForeignKeyChecks0() {
-        String sql = "Set foreign_key_checks = 0";
+    //save the balance
+    public void saveBalance(double balance, int User_ID) {
+        String sql = "Update User set Balance = ? where ID_User = ?";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
+            ps.setDouble(1, balance);
+            ps.setInt(2, User_ID);
             ps.execute();
             closeConnection();
             ps.close();
@@ -71,8 +72,8 @@ public class UpgradesJDBCDoa {
     }
 
     /*-----------------------------------------
-              Verbindungs auf-und abbau
-     ----------------------------------------*/
+          Verbindungs auf-und abbau
+    -----------------------------------------*/
     private Connection openConnection() throws SQLException {
         return ConnectionFactory.getInstance().getConnection();
     }

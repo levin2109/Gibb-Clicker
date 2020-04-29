@@ -1,8 +1,10 @@
 package sample;
 
+import domain.SaveJDBCDoa;
 import domain.ToolsJDBCDoa;
 import domain.UpgradesJDBCDoa;
 import domain.UserJDBCDoa;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,10 @@ import java.util.List;
 public class GUI extends Application {
 
     /*-----------------------------------------------------
-                        GUI Bauteile
+                 GUI Bauteile & Deklarationen
     ------------------------------------------------------*/
     static List<Tools> toolsList = new ArrayList<>();
+    static List<Upgrades> upgradesList = new ArrayList<>();
     String username;
     Stage window;
     Scene login, scene1, registartion;
@@ -38,11 +40,12 @@ public class GUI extends Application {
             btn_login, btn_login_registration, btn_registration, btn_registration_login;
     TextField username_login, username_registration;
     PasswordField password_login, password_registration1, password_registration2;
-
+    int ID_User;
 
     /*-----------------------------------
           create Objects from JDBC's
     -----------------------------------*/
+    SaveJDBCDoa Save = new SaveJDBCDoa();
     UserJDBCDoa User = new UserJDBCDoa();
     UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
@@ -110,11 +113,11 @@ public class GUI extends Application {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(username_login.getText());
                                     tool.loadMoneyPerSecond(username_login.getText());
-                                    System.out.println(tool.getName() + " Level " + tool.getLevel() + " Money: " + tool.getMoneyPerSecond() + " Multiplier " + tool.getMultiplier() + " status " + tool.isStatus());
                                 }
 
                             }
                             username = username_login.getText();
+                            ID_User = User.getUserID(username);
                             game.loadBalance(username);
                             primaryStage.setScene(scene1());
                             primaryStage.show();
@@ -196,7 +199,7 @@ public class GUI extends Application {
                             for (int i = 1; i <= 40; i++) {
                                 Upgrades.registrateUpgrades(User_ID, i, false);
                             }
-                            System.out.println(User_ID);
+                            ID_User = User.getUserID(username_registration.getText());
                             primaryStage.setScene(scene1());
                             primaryStage.show();
                         } else {
@@ -216,8 +219,6 @@ public class GUI extends Application {
                 }
             }
         });
-
-
         login = new Scene(grid_login, 300, 230);
         registartion = new Scene(grid_registration, 340, 250);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -257,9 +258,6 @@ public class GUI extends Application {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
             }
-            // Select Name from Tools
-            // join Upgrades on ID_Tool = Tool_ID
-            // where Tool_ID = ID_Tool
 
             Button powerup = new Button();
             powerup.setMinWidth(70);
@@ -334,7 +332,7 @@ public class GUI extends Application {
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
-
+        label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -470,34 +468,43 @@ public class GUI extends Application {
             }
         });
         grid_main.setColumnSpan(label_title, 1500);
+        btn_save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Save.saveTools(toolsList, ID_User);
+                Save.saveUpgrades(upgradesList, ID_User);
+                Save.saveBalance(game.getBalance(), ID_User);
+            }
+        });
 
 
         scene1 = new Scene(grid_main, 1500, 775);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        AnimationTimer timer =  new AnimationTimer(){
+
+            @Override
+            public void handle(long now) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                updateLabels();
+            }
+        };
+        timer.start();
         return scene1;
     }
 
-    public List<Tools> getToolsList() {
-        return toolsList;
-    }
-
     public void updateLabels() {
-        System.out.println("updaze");
-        //System.out.println(label_balance.getT);
-        /*if (label_balance == null) {
-            System.out.println("methode");
-            label_balance = new Label(game.getBalance() + " $");
-            int balance = (int) game.getBalance();
-            int moneyPerSecond = (int) game.calcMoneyPerSecond(toolsList);
-            label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
-        }*/
+        if (toolsList.size() >= 1) {
+            game.addMoney(toolsList);
+        }
         if (label_balance != null) {
-            System.out.println("methode2");
             int balance = (int) game.getBalance();
             label_balance.setText(balance + " $");
             int moneyPerSecond = (int) game.calcMoneyPerSecond(toolsList);
-            label_moneyPerSecond.setText(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
-            //setScene();
+            label_moneyPerSecond.setText(moneyPerSecond + "$ pro Sekunde");
         }
     }
 
