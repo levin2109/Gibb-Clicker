@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Gibb {
     public static double balance;
-    private long moneyPerClick;
-    private int multiplier;
+    private long moneyPerClick = 1;
+    private int multiplier = 1;
 
     /*------------------------------------------------
                         Constructor

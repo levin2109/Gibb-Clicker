@@ -33,6 +33,25 @@ public class Tools {
         status = true;
     }
 
+    //buy this Tool
+    public void buy(Gibb game) {
+        double balance = game.getBalance();
+        if (level != 0) {
+            if (balance >= (price + (pricePerLevel * level))) {
+                game.setBalance(balance - (price + (pricePerLevel * level)));
+                level = level + 1;
+                moneyPerSecond = moneyPerSecond * level;
+            }
+        } else {
+            if (balance >= price) {
+                game.setBalance(balance - price);
+                activate();
+                level = level + 1;
+                moneyPerSecond = 1;
+            }
+        }
+    }
+
     //load the Money per Second for the Player when he is back in the game
     public void loadMoneyPerSecond(String username) {
         int ID_Tools = Tools.getToolID(this.name);
@@ -84,9 +103,13 @@ public class Tools {
         return pricePerLevel;
     }
 
+    public ToolsJDBCDoa getTools() {
+        return Tools;
+    }
+
     /*------------------------------------------------
-                              Setter
-        ------------------------------------------------*/
+                                  Setter
+            ------------------------------------------------*/
     public void setMultiplier(int multiplier) {
         this.multiplier = multiplier;
     }
@@ -107,5 +130,13 @@ public class Tools {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPricePerLevel(long pricePerLevel) {
+        this.pricePerLevel = pricePerLevel;
+    }
+
+    public void setTools(ToolsJDBCDoa tools) {
+        Tools = tools;
     }
 }
