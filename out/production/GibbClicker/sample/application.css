@@ -127,6 +127,17 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+.powerupCursor{
+    -fx-background-image: url("/sample/Icons/cursor.png");
+    -fx-background-size: 60px;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: #f0efef;
+    -fx-border-style: solid;
+    -fx-border-width: 5px;
+    -fx-border-radius: 4px;
 }
 
 
