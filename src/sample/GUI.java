@@ -315,6 +315,7 @@ public class GUI extends Application {
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
                             upgradesList.get(i).buy(game,toolsList);
+
                         }
                     }
                 }
@@ -641,14 +642,11 @@ public class GUI extends Application {
             }
             result = arrayNumber[0] +""+ arrayNumber[1] + "." + arrayNumber[2] + " Millionen CHF";
         } else if (number >= 100000000 && number < 1000000000) {
-            System.out.println(number);
             result = Long.toString(number);
-            System.out.println(result);
             char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 arrayNumber[i] = result.charAt(i);
             }
-            System.out.println(arrayNumber);
             result = arrayNumber[0] +""+ arrayNumber[1] + arrayNumber[2] + "." + arrayNumber[3] + " Millionen CHF";
         } else if (number >= 100 && number < 1000) {
             result = Long.toString(number);
