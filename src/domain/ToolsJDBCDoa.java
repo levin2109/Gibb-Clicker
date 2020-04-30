@@ -59,11 +59,32 @@ public class ToolsJDBCDoa {
         return ID_Tools;
     }
 
+    //
+    public int loadLevelPrice(int ID_Tools, String username) {
+        UserJDBCDoa User = new UserJDBCDoa();
+        int price = 0;
+        int ID_User = User.getUserID(username);
+        String sql = "Select Price from User_Tools where User_ID = ? && Tools_ID = ?";
+        try{
+            con = openConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, ID_User);
+            ps.setInt(2, ID_Tools);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                price = rs.getInt("Price");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
+
     //create all tool-objects from database
     public List<Tools> loadTools(String username) {
         List<Tools> all = new ArrayList<>();
         long moneyPerSecond;
-        String sql = "Select Name, Price, Level, Status, MoneyPerSecond from Tools join User_Tools on ID_Tools=Tools_ID join User on ID_User=User_ID where Username = ?";
+        String sql = "Select ID_Tools, Name, Tools.Price, Level, Status, MoneyPerSecond from Tools join User_Tools on ID_Tools=Tools_ID join User on ID_User=User_ID where Username = ?";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
@@ -72,10 +93,10 @@ public class ToolsJDBCDoa {
             while (rs.next()) {
                 if (rs.getInt("Level") != 0) {
                     moneyPerSecond = rs.getInt("Level") * rs.getLong("MoneyPerSecond");
+                    all.add(new Tools(rs.getString("Name"), rs.getInt("Price"), rs.getInt("Level"), rs.getBoolean("Status"), moneyPerSecond, 0, rs.getLong("MoneyPerSecond")));
                 } else {
-                    moneyPerSecond = rs.getLong("MoneyPerSecond");
+                    all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), rs.getLong("MoneyPerSecond"), 0, rs.getLong("MoneyPerSecond")));
                 }
-                all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), moneyPerSecond, 0, rs.getLong("MoneyPerSecond")));
             }
             closeConnection();
             rs.close();
