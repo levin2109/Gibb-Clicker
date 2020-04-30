@@ -9,21 +9,19 @@ public class Tools {
     private boolean status;
     private long moneyPerSecond;
     private int multiplier = 1;
-    private long pricePerLevel;
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
 
 
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier, long pricePerLevel) {
+    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier) {
         this.name = name;
         this.price = price;
         this.level = level;
         this.status = status;
         this.moneyPerSecond = moneyPerSecond;
         this.multiplier = multiplier;
-        this.pricePerLevel = pricePerLevel;
     }
     /*------------------------------------------------
                          Methods
@@ -37,8 +35,8 @@ public class Tools {
     public void buy(Gibb game) {
         long balance = (long) game.getBalance();
         if (level != 0) {
-            if (balance >= (price + (pricePerLevel * level))) {
-                game.setBalance(balance - (price + (pricePerLevel * level)));
+            if (balance >= (price * (0.6*level))) {
+                game.setBalance(balance - (price * (0.6*level)));
                 level = level + 1;
                 moneyPerSecond = moneyPerSecond * level;
             }
@@ -108,10 +106,6 @@ public class Tools {
         return name;
     }
 
-    public long getPricePerLevel() {
-        return pricePerLevel;
-    }
-
     public ToolsJDBCDoa getTools() {
         return Tools;
     }
@@ -139,10 +133,6 @@ public class Tools {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPricePerLevel(long pricePerLevel) {
-        this.pricePerLevel = pricePerLevel;
     }
 
     public void setTools(ToolsJDBCDoa tools) {
