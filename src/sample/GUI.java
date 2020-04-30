@@ -19,7 +19,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import sun.misc.ClassLoaderUtil;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -601,17 +603,28 @@ public class GUI extends Application {
     //check the tools and give it new look
     public void checkTools(){
         for(int i = 0; i < toolsList.size(); i++) {
-
-            if (toolsList.get(i).getLevel() >= 1){
-                toolsButton.get(i).setStyle("-fx-opacity: 1");
-                toolsButton.get(i).setStyle("-fx-border-color: green");
-            }else if (toolsList.get(i).getPrice() <= game.getBalance()) {
-                toolsButton.get(i).setStyle("-fx-opacity: 1");
-            } else {
-                toolsButton.get(i).setStyle("-fx-opacity: 0.5");
+                if (toolsList.get(i).getPrice() * (1.6 * toolsList.get(i).getLevel()) == 0.0) {
+                    if(toolsList.get(i).getPrice() <= game.getBalance()){
+                        toolsButton.get(i).setStyle("-fx-opacity: 1");
+                        toolsButton.get(i).setStyle("-fx-border-color: green");
+                    }
+                    else{
+                        toolsButton.get(i).setStyle("-fx-opacity: 0.5");
+                    }
+                }
+                else if(toolsList.get(i).getPrice() * (1.6 * toolsList.get(i).getLevel()) < game.getBalance()){
+                    toolsButton.get(i).setStyle("-fx-opacity: 1");
+                    toolsButton.get(i).setStyle("-fx-border-color: green");
+            }
+                else if (toolsList.get(i).getLevel() >= 1) {
+                    toolsButton.get(i).setStyle("-fx-opacity: 1");
+                    toolsButton.get(i).setStyle("-fx-border-color: black");
+                } else {
+                    toolsButton.get(i).setStyle("-fx-opacity: 0.5");
+                }
             }
         }
-    }
+
 
     //update labels (moneyPerSecond, balance)
     public void updateLabels() {
