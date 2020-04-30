@@ -23,10 +23,11 @@ public class SaveJDBCDoa {
         try {
             con = openConnection();
             for (Tools tool : toolsList) {
+                long price = (long) (tool.getPrice());
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, tool.getLevel());
                 ps.setBoolean(2,tool.isStatus());
-                ps.setLong(3,tool.getPrice());
+                ps.setLong(3, price);
                 ps.setInt(4, User_ID);
                 ps.setInt(5, tool.getToolID());
                 ps.execute();

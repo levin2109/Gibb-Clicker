@@ -299,6 +299,9 @@ public class GUI extends Application {
                 case 10:
                     powerup.getStyleClass().add("powerupRussischeReviews");
                     break;
+                case 11:
+                    powerup.getStyleClass().add("powerupClicker");
+                    break;
                 default:
             }
         }
