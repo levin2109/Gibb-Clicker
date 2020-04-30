@@ -312,6 +312,7 @@ public class GUI extends Application {
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
                             upgradesList.get(i).buy(game,toolsList);
+
                         }
                     }
                 }
@@ -457,47 +458,47 @@ public class GUI extends Application {
                         case "button powerupVMs":
                             toolsList.get(1).buy(game);
                             toolsLabelLevel.get(1).setText(String.valueOf(toolsList.get(1).getLevel()));
-                            toolsLabelPrice.get(1).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(1).setText(priceGeneratorLong(toolsList.get(1).getPrice()+(toolsList.get(1).getPricePerLevel()*toolsList.get(1).getLevel())));
                             break;
                         case "button powerupLehere":
                             toolsList.get(2).buy(game);
                             toolsLabelLevel.get(2).setText(String.valueOf(toolsList.get(2).getLevel()));
-                            toolsLabelPrice.get(2).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(2).setText(priceGeneratorLong(toolsList.get(2).getPrice()+(toolsList.get(2).getPricePerLevel()*toolsList.get(2).getLevel())));
                             break;
                         case "buttno powerupKantine":
                             toolsList.get(3).buy(game);
                             toolsLabelLevel.get(3).setText(String.valueOf(toolsList.get(3).getLevel()));
-                            toolsLabelPrice.get(3).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(3).setText(priceGeneratorLong(toolsList.get(3).getPrice()+(toolsList.get(3).getPricePerLevel()*toolsList.get(3).getLevel())));
                             break;
                         case "button powerupPCs":
                             toolsList.get(4).buy(game);
                             toolsLabelLevel.get(4).setText(String.valueOf(toolsList.get(4).getLevel()));
-                            toolsLabelPrice.get(4).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(4).setText(priceGeneratorLong(toolsList.get(4).getPrice()+(toolsList.get(4).getPricePerLevel()*toolsList.get(4).getLevel())));
                             break;
                         case "button powerupHeizung":
                             toolsList.get(5).buy(game);
                             toolsLabelLevel.get(5).setText(String.valueOf(toolsList.get(5).getLevel()));
-                            toolsLabelPrice.get(5).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(5).setText(priceGeneratorLong(toolsList.get(5).getPrice()+(toolsList.get(5).getPricePerLevel()*toolsList.get(5).getLevel())));
                             break;
                         case "button powerupKlimaanlage":
                             toolsList.get(6).buy(game);
                             toolsLabelLevel.get(6).setText(String.valueOf(toolsList.get(6).getLevel()));
-                            toolsLabelPrice.get(6).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(6).setText(priceGeneratorLong(toolsList.get(6).getPrice()+(toolsList.get(6).getPricePerLevel()*toolsList.get(6).getLevel())));
                             break;
                         case "button powerupWCs":
                             toolsList.get(7).buy(game);
                             toolsLabelLevel.get(7).setText(String.valueOf(toolsList.get(7).getLevel()));
-                            toolsLabelPrice.get(7).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(7).setText(priceGeneratorLong(toolsList.get(7).getPrice()+(toolsList.get(7).getPricePerLevel()*toolsList.get(7).getLevel())));
                             break;
                         case "button powerupKlangbrueche":
                             toolsList.get(8).buy(game);
                             toolsLabelLevel.get(8).setText(String.valueOf(toolsList.get(8).getLevel()));
-                            toolsLabelPrice.get(8).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(8).setText(priceGeneratorLong(toolsList.get(8).getPrice()+(toolsList.get(8).getPricePerLevel()*toolsList.get(8).getLevel())));
                             break;
                         case "button powerupRussischeReviews":
                             toolsList.get(9).buy(game);
                             toolsLabelLevel.get(9).setText(String.valueOf(toolsList.get(9).getLevel()));
-                            toolsLabelPrice.get(9).setText(priceGeneratorLong(toolsList.get(0).getPrice()+(toolsList.get(0).getPricePerLevel()*toolsList.get(0).getLevel())));
+                            toolsLabelPrice.get(9).setText(priceGeneratorLong(toolsList.get(9).getPrice()+(toolsList.get(9).getPricePerLevel()*toolsList.get(9).getLevel())));
                             break;
                         default:
                     }
@@ -632,14 +633,11 @@ public class GUI extends Application {
             }
             result = arrayNumber[0] +""+ arrayNumber[1] + "." + arrayNumber[2] + " Millionen CHF";
         } else if (number >= 100000000 && number < 1000000000) {
-            System.out.println(number);
             result = Long.toString(number);
-            System.out.println(result);
             char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 arrayNumber[i] = result.charAt(i);
             }
-            System.out.println(arrayNumber);
             result = arrayNumber[0] +""+ arrayNumber[1] + arrayNumber[2] + "." + arrayNumber[3] + " Millionen CHF";
         } else if (number >= 100 && number < 1000) {
             result = Long.toString(number);
