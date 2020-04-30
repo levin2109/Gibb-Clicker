@@ -313,6 +313,7 @@ public class GUI extends Application {
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
                             upgradesList.get(i).buy(game,toolsList);
+
                         }
                     }
                 }
@@ -554,7 +555,6 @@ public class GUI extends Application {
                 System.exit(0);
             }
         });
-
         //make save function
         btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
