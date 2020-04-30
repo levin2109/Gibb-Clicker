@@ -55,9 +55,13 @@ public class Tools {
 
     //update MoneyPerSecond
     public void updateMoneyPerSecond() {
+
         System.out.println(moneyPerSecond);
         System.out.println(multiplier);
         moneyPerSecond = moneyPerScondNormal * multiplier;
+
+        moneyPerSecond = moneyPerSecond * multiplier;
+
     }
 
     //load the Money per Second for the Player when he is back in the game
