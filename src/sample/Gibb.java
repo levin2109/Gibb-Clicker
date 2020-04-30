@@ -45,8 +45,6 @@ public class Gibb {
 
     public double addMoney(List<Tools> toolsList) {
         addBalance(calcMoneyPerSecond(toolsList) / 5);
-        System.out.println(calcMoneyPerSecond(toolsList) / 5);
-        System.out.println(balance);
         return calcMoneyPerSecond(toolsList) / 5;
     }
     /*------------------------------------------------

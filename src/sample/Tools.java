@@ -53,8 +53,6 @@ public class Tools {
 
     //update MoneyPerSecond
     public void updateMoneyPerSecond() {
-        System.out.println(moneyPerSecond);
-        System.out.println(multiplier);
         moneyPerSecond = moneyPerSecond * multiplier;
     }
 
