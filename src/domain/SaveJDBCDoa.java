@@ -19,15 +19,16 @@ public class SaveJDBCDoa {
     -----------------------------------------*/
     //save all new tool levels
     public void saveTools(List<Tools> toolsList, int User_ID) {
-        String sql = "Update User_Tools set Level = ?, Status = ? where User_ID = ? and Tools_ID = ?";
+        String sql = "Update User_Tools set Level = ?, Status = ?, Price = ? where User_ID = ? and Tools_ID = ?";
         try {
             con = openConnection();
             for (Tools tool : toolsList) {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, tool.getLevel());
                 ps.setBoolean(2,tool.isStatus());
-                ps.setInt(3, User_ID);
-                ps.setInt(4, tool.getToolID());
+                ps.setLong(3,tool.getPrice());
+                ps.setInt(4, User_ID);
+                ps.setInt(5, tool.getToolID());
                 ps.execute();
             }
             closeConnection();

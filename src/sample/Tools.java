@@ -33,13 +33,18 @@ public class Tools {
         status = true;
     }
 
+    //update the price
+    public void updatePrice(int ID_Tool, String username) {
+        this.price = Tools.loadLevelPrice(ID_Tool, username);
+    }
+
     //buy this Tool
     public void buy(Gibb game) {
         long balance = (long) game.getBalance();
         if (level != 0) {
             if (balance >= (price * (1.6*level))) {
                 game.setBalance(balance - (price * (1.6*level)));
-                price = (long) (price * (0.6*level));
+                price = (long) (price * 1.3);
                 level = level + 1;
                 moneyPerSecond = moneyPerScondNormal * level * multiplier;
             }
