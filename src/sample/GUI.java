@@ -338,13 +338,13 @@ public class GUI extends Application {
 
 
         /* Center */
-        labelBalance = new Label(priceGeneratorLong(game.getBalance()));
+        labelBalance = new Label(priceGeneratorLong((long) game.getBalance()));
         btnGibb = new Button();
         btnGibb.setPrefHeight(800);
         btnGibb.setPrefWidth(1500);
         btnGibb.getStyleClass().add("btnGibb");
 
-        labelMoneyPerSecond = new Label(priceGeneratorLong(game.calcMoneyPerSecond(toolsList)) + " pro Sekunde");
+        labelMoneyPerSecond = new Label(priceGeneratorLong( (long) game.calcMoneyPerSecond(toolsList)) + " pro Sekunde");
         labelTitle = new Label("GIBB Clicker");
         gridCenter.add(labelMoneyPerSecond, 0, 1);
         gridCenter.add(btnGibb, 0, 2);
@@ -604,9 +604,9 @@ public class GUI extends Application {
             game.addMoney(toolsList);
         }
         if (labelBalance != null) {
-            String balance = priceGeneratorLong(game.getBalance());
+            String balance = priceGeneratorLong((long) game.getBalance());
             labelBalance.setText(balance);
-            labelMoneyPerSecond.setText(priceGeneratorLong(game.calcMoneyPerSecond(toolsList))  + " pro Sekunde");
+            labelMoneyPerSecond.setText(priceGeneratorLong((long) game.calcMoneyPerSecond(toolsList))  + " pro Sekunde");
         }
     }
 

@@ -5,7 +5,7 @@ import domain.UserJDBCDoa;
 import java.util.List;
 
 public class Gibb {
-    public static long balance;
+    public static double balance;
     private long moneyPerClick = 1;
     private int multiplier = 1;
 
@@ -13,7 +13,7 @@ public class Gibb {
                         Constructor
     ------------------------------------------------*/
 
-    public Gibb(long balance) {
+    public Gibb(double balance) {
         this.balance = balance;
     }
 
@@ -29,12 +29,12 @@ public class Gibb {
         balance = User.getBalance(username);
     }
 
-    public void addBalance(long amount) {
+    public void addBalance(double amount) {
         balance = balance + amount;
     }
 
-    public long calcMoneyPerSecond(List<Tools> toolsList) {
-        long money = 0;
+    public double calcMoneyPerSecond(List<Tools> toolsList) {
+        double money = 0;
         for (Tools tool : toolsList) {
             if (tool.isStatus()) {
                 money = money + tool.getMoneyPerSecond();
@@ -43,14 +43,16 @@ public class Gibb {
         return money;
     }
 
-    public long addMoney(List<Tools> toolsList) {
+    public double addMoney(List<Tools> toolsList) {
         addBalance(calcMoneyPerSecond(toolsList) / 5);
+        System.out.println(calcMoneyPerSecond(toolsList) / 5);
+        System.out.println(balance);
         return calcMoneyPerSecond(toolsList) / 5;
     }
     /*------------------------------------------------
                           Getter
     ------------------------------------------------*/
-    public static long getBalance() {
+    public static double getBalance() {
         return balance;
     }
 
@@ -69,7 +71,7 @@ public class Gibb {
         this.moneyPerClick = moneyPerClick;
     }
 
-    public static void setBalance(long balance) {
+    public static void setBalance(double balance) {
         Gibb.balance = balance;
     }
 
