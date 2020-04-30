@@ -37,9 +37,9 @@ public class Tools {
     public void buy(Gibb game) {
         long balance = (long) game.getBalance();
         if (level != 0) {
-            if (balance >= (price * (0.6*level))) {
-                game.setBalance(balance - (price * (0.6*level)));
-                price = price * 6 / 10 * level;
+            if (balance >= (price * (1.6*level))) {
+                game.setBalance(balance - (price * (1.6*level)));
+                price = (long) (price * (0.6*level));
                 level = level + 1;
                 moneyPerSecond = moneyPerScondNormal * level * multiplier;
             }
