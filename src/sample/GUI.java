@@ -429,6 +429,7 @@ public class GUI extends Application {
             gridTools.add(toolLabelName, 1, i + 1);
             toolLabelName.getStyleClass().add("labelToolName");
             toolsLabelName.add(toolLabelName);
+            toolLabelName.setPadding(new Insets(0,0,0,10));
 
             Label toolLabelLevel = new Label(Integer.toString(Tools.loadTools(username).get(i).getLevel()));
             gridTools.add(toolLabelLevel, 2, i + 1);
@@ -439,6 +440,8 @@ public class GUI extends Application {
             gridTools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("labelToolPrice");
             toolsLabelPrice.add(toolLabelPrice);
+            toolLabelPrice.setPadding(new Insets(0,0,15,10));
+            toolLabelPrice.setAlignment(Pos.BOTTOM_LEFT);
 
         }
         //make the function for every tool
@@ -597,8 +600,9 @@ public class GUI extends Application {
     //check the tools and give it new look
     public void checkTools(){
         for(int i = 0; i < toolsList.size(); i++) {
-            if (toolsList.get(i).isStatus()){
-                powerupsList.get(i).setStyle("-fx-border-color: green");
+            if (toolsList.get(i).getLevel() >= 1){
+                toolsButton.get(i).setStyle("-fx-opacity: 1");
+                toolsButton.get(i).setStyle("-fx-border-color: green");
             }else if (toolsList.get(i).getPrice() <= game.getBalance()) {
                 toolsButton.get(i).setStyle("-fx-opacity: 1");
             } else {

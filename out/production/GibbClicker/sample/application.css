@@ -12,12 +12,13 @@
 }
 .labelToolName{
     -fx-pref-width: 200px;
-    -fx-alignment: center;
+    -fx-alignment: center-left;
     -fx-pref-height: 90px;
+    -fx-font-size: 22px;
+    -fx-font-weight: 400;
 }
 .labelToolPrice{
     -fx-pref-width: 200px;
-    -fx-alignment: bottom-center;
     -fx-pref-height: 90px;
 }
 .labelLevel{
@@ -27,6 +28,7 @@
 }
 .gridLogin{
     -fx-background-color: white;
+    -fx-font-size: 16;
 }
 .powerupSmartlearn{
     -fx-background-image: url("/sample/Icons/Smartlearn.png");
@@ -37,6 +39,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupKantine{
     -fx-background-image: url("/sample/Icons/Kantine.png");
@@ -47,6 +50,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupHeizung{
     -fx-background-image: url("/sample/Icons/Heizung.png");
@@ -57,6 +61,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupKlimaanlage{
     -fx-background-image: url("/sample/Icons/Klimaanlage.png");
@@ -67,6 +72,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupLehrer{
     -fx-background-image: url("/sample/Icons/Lehrer.png");
@@ -77,6 +83,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupPcs{
     -fx-background-image: url("/sample/Icons/Pcs.png");
@@ -87,6 +94,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupVMs{
     -fx-background-image: url("/sample/Icons/VMs.png");
@@ -97,6 +105,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupWCs{
     -fx-background-image: url("/sample/Icons/WCs.png");
@@ -107,6 +116,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupKlangbruecke{
     -fx-background-image: url("/sample/Icons/Klangbruecke.png");
@@ -117,6 +127,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 .powerupRussischeReviews{
     -fx-background-image: url("/sample/Icons/Russische_Reviews.png");
@@ -138,6 +149,7 @@
     -fx-border-style: solid;
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 
 
