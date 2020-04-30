@@ -39,6 +39,7 @@ public class Tools {
         if (level != 0) {
             if (balance >= (price * (0.6*level))) {
                 game.setBalance(balance - (price * (0.6*level)));
+                price = price * 6 / 10 * level;
                 level = level + 1;
                 moneyPerSecond = moneyPerScondNormal * level * multiplier;
             }

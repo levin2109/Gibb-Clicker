@@ -27,6 +27,7 @@ public class GUI extends Application {
     private static List<Tools> toolsList = new ArrayList<>();
     private List<Button> powerupsList = new ArrayList<>();
     private static List<Upgrades> upgradesList = new ArrayList<>();
+    private List<Button> toolsButton = new ArrayList<>();
     private static Gibb game = new Gibb(0);
     private int idUser;
     private String username;
@@ -100,9 +101,6 @@ public class GUI extends Application {
                     } else {
                         if (User.checkPassword(usernameLogin.getText(), passwordLogin.getText())) {
                             toolsList = Tools.loadTools(usernameLogin.getText());
-                            for (Tools tool: toolsList) {
-                                System.out.println(tool.getName()+" "+tool.getMoneyPerSecond()+" "+tool.getMultiplier());
-                            }
                             for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(usernameLogin.getText());
@@ -180,8 +178,6 @@ public class GUI extends Application {
                         labelRegistrationVerification.setTextFill(Color.web("red"));
                         labelRegistrationVerification.setFont(Font.font("Helvetica", 12));
                     } else if (!passwordRegistration1.getText().equals(passwordRegistration2.getText())) {
-                        System.out.println(passwordRegistration1.getText());
-                        System.out.println(passwordRegistration2.getText());
                         labelRegistrationVerification.setText("Die Passwörter stimmen nicht überein.");
                         labelRegistrationVerification.setTextFill(Color.web("red"));
                         labelRegistrationVerification.setFont(Font.font("Helvetica", 12));
@@ -312,7 +308,6 @@ public class GUI extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                     String buttonPowerup = String.valueOf(btn.getId());
-                    System.out.println(buttonPowerup);
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
                             upgradesList.get(i).buy(game,toolsList);
@@ -385,7 +380,6 @@ public class GUI extends Application {
 
         /* Tools */
         labelTools = new Label("Tools");
-        List<Button> toolsButton = new ArrayList<>();
         List<Label> toolsLabelName = new ArrayList<>();
         List<Label> toolsLabelLevel = new ArrayList<>();
         List<Label> toolsLabelPrice = new ArrayList<>();
@@ -578,6 +572,7 @@ public class GUI extends Application {
                 if (sleep[0] % 22 == 0) {
                     updateLabels();
                     checkPowerup();
+                    checkTools();
                 }
             }
         };
@@ -585,15 +580,29 @@ public class GUI extends Application {
         return scene1;
     }
 
-    //check the powerups and give new backgroundcolor
+    //check the powerups and give it a new look
     public void checkPowerup() {
         for (int i = 0; i < upgradesList.size(); i++) {
             if (upgradesList.get(i).isStatus()) {
-                powerupsList.get(i).setStyle("-fx-background-color: green");
+                powerupsList.get(i).setStyle("-fx-border-color: green");
             } else if (upgradesList.get(i).getPrice() <= game.getBalance()) {
-                powerupsList.get(i).setStyle("-fx-background-color: blue");
+                powerupsList.get(i).setStyle("-fx-opacity: 1");
+
             } else {
-                powerupsList.get(i).setStyle("-fx-background-color: red");
+                powerupsList.get(i).setStyle("-fx-opacity: 0.5");
+            }
+        }
+    }
+
+    //check the tools and give it new look
+    public void checkTools(){
+        for(int i = 0; i < toolsList.size(); i++) {
+            if (toolsList.get(i).isStatus()){
+                powerupsList.get(i).setStyle("-fx-border-color: green");
+            }else if (toolsList.get(i).getPrice() <= game.getBalance()) {
+                toolsButton.get(i).setStyle("-fx-opacity: 1");
+            } else {
+                toolsButton.get(i).setStyle("-fx-opacity: 0.5");
             }
         }
     }
@@ -676,8 +685,6 @@ public class GUI extends Application {
                 arrayNumber[i] = result.charAt(i);
             }
             result = arrayNumber[0]+""+ " CHF";
-        } else {
-            System.out.println("Fehler");
         }
         return (result);
     }
