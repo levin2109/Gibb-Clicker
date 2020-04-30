@@ -100,6 +100,9 @@ public class GUI extends Application {
                     } else {
                         if (User.checkPassword(usernameLogin.getText(), passwordLogin.getText())) {
                             toolsList = Tools.loadTools(usernameLogin.getText());
+                            for (Tools tool: toolsList) {
+                                System.out.println(tool.getName()+" "+tool.getMoneyPerSecond()+" "+tool.getMultiplier());
+                            }
                             for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(usernameLogin.getText());
@@ -454,6 +457,9 @@ public class GUI extends Application {
                     switch (c) {
                         case "button powerupSmartlearn":
                             toolsList.get(0).buy(game);
+                            for (Tools tool: toolsList) {
+                                System.out.println(tool.getName()+" "+tool.getMoneyPerSecond()+" "+tool.getMultiplier());
+                            }
                             toolsLabelLevel.get(0).setText(String.valueOf(toolsList.get(0).getLevel()));
                             toolsLabelPrice.get(0).setText(priceGeneratorLong((long) (toolsList.get(0).getPrice()+(0.6*toolsList.get(0).getLevel()))));
                             break;
