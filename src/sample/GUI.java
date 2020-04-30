@@ -453,62 +453,56 @@ public class GUI extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                     String c = String.valueOf(btn.getStyleClass());
-                    System.out.println(c);
                     switch (c) {
                         case "button powerupSmartlearn":
                             toolsList.get(0).buy(game);
-                            for (Tools tool: toolsList) {
-                                System.out.println(tool.getName()+" "+tool.getMoneyPerSecond()+" "+tool.getMultiplier());
-                            }
                             toolsLabelLevel.get(0).setText(String.valueOf(toolsList.get(0).getLevel()));
-                            toolsLabelPrice.get(0).setText(priceGeneratorLong((long) (toolsList.get(0).getPrice()+(0.6*toolsList.get(0).getLevel()))));
+                            toolsLabelPrice.get(0).setText(priceGeneratorLong((long) (toolsList.get(0).getPrice()*(0.6*toolsList.get(0).getLevel()))));
                             break;
                         case "button powerupVMs":
                             toolsList.get(1).buy(game);
                             toolsLabelLevel.get(1).setText(String.valueOf(toolsList.get(1).getLevel()));
-                            toolsLabelPrice.get(1).setText(priceGeneratorLong((long) (toolsList.get(1).getPrice()+(0.6*toolsList.get(1).getLevel()))));
+                            toolsLabelPrice.get(1).setText(priceGeneratorLong((long) (toolsList.get(1).getPrice()*(0.6*toolsList.get(1).getLevel()))));
                             break;
                         case "button powerupLehrer":
                             toolsList.get(2).buy(game);
-                            System.out.println("inside Lehrer");
                             toolsLabelLevel.get(2).setText(String.valueOf(toolsList.get(2).getLevel()));
-                            toolsLabelPrice.get(2).setText(priceGeneratorLong((long) (toolsList.get(2).getPrice()+(0.6*toolsList.get(2).getLevel()))));
+                            toolsLabelPrice.get(2).setText(priceGeneratorLong((long) (toolsList.get(2).getPrice()*(0.6*toolsList.get(2).getLevel()))));
                             break;
                         case "button powerupKantine":
                             toolsList.get(3).buy(game);
-                            System.out.println("inside kantine");
                             toolsLabelLevel.get(3).setText(String.valueOf(toolsList.get(3).getLevel()));
-                            toolsLabelPrice.get(3).setText(priceGeneratorLong((long) (toolsList.get(3).getPrice()+(0.6*toolsList.get(3).getLevel()))));
+                            toolsLabelPrice.get(3).setText(priceGeneratorLong((long) (toolsList.get(3).getPrice()*(0.6*toolsList.get(3).getLevel()))));
                             break;
                         case "button powerupPCs":
                             toolsList.get(4).buy(game);
                             toolsLabelLevel.get(4).setText(String.valueOf(toolsList.get(4).getLevel()));
-                            toolsLabelPrice.get(4).setText(priceGeneratorLong((long) (toolsList.get(4).getPrice()+(0.6*toolsList.get(4).getLevel()))));
+                            toolsLabelPrice.get(4).setText(priceGeneratorLong((long) (toolsList.get(4).getPrice()*(0.6*toolsList.get(4).getLevel()))));
                             break;
                         case "button powerupHeizung":
                             toolsList.get(5).buy(game);
                             toolsLabelLevel.get(5).setText(String.valueOf(toolsList.get(5).getLevel()));
-                            toolsLabelPrice.get(5).setText(priceGeneratorLong((long) (toolsList.get(5).getPrice()+(0.6*toolsList.get(5).getLevel()))));
+                            toolsLabelPrice.get(5).setText(priceGeneratorLong((long) (toolsList.get(5).getPrice()*(0.6*toolsList.get(5).getLevel()))));
                             break;
                         case "button powerupKlimaanlage":
                             toolsList.get(6).buy(game);
                             toolsLabelLevel.get(6).setText(String.valueOf(toolsList.get(6).getLevel()));
-                            toolsLabelPrice.get(6).setText(priceGeneratorLong((long) (toolsList.get(6).getPrice()+(0.6*toolsList.get(6).getLevel()))));
+                            toolsLabelPrice.get(6).setText(priceGeneratorLong((long) (toolsList.get(6).getPrice()*(0.6*toolsList.get(6).getLevel()))));
                             break;
                         case "button powerupWCs":
                             toolsList.get(7).buy(game);
                             toolsLabelLevel.get(7).setText(String.valueOf(toolsList.get(7).getLevel()));
-                            toolsLabelPrice.get(7).setText(priceGeneratorLong((long) (toolsList.get(7).getPrice()+(0.6*toolsList.get(7).getLevel()))));
+                            toolsLabelPrice.get(7).setText(priceGeneratorLong((long) (toolsList.get(7).getPrice()*(0.6*toolsList.get(7).getLevel()))));
                             break;
                         case "button powerupKlangbrueche":
                             toolsList.get(8).buy(game);
                             toolsLabelLevel.get(8).setText(String.valueOf(toolsList.get(8).getLevel()));
-                            toolsLabelPrice.get(8).setText(priceGeneratorLong((long) (toolsList.get(8).getPrice()+(0.6*toolsList.get(8).getLevel()))));
+                            toolsLabelPrice.get(8).setText(priceGeneratorLong((long) (toolsList.get(8).getPrice()*(0.6*toolsList.get(8).getLevel()))));
                             break;
                         case "button powerupRussischeReviews":
                             toolsList.get(9).buy(game);
                             toolsLabelLevel.get(9).setText(String.valueOf(toolsList.get(9).getLevel()));
-                            toolsLabelPrice.get(9).setText(priceGeneratorLong((long) (toolsList.get(9).getPrice()+(0.6*toolsList.get(9).getLevel()))));
+                            toolsLabelPrice.get(9).setText(priceGeneratorLong((long) (toolsList.get(9).getPrice()*(0.6*toolsList.get(9).getLevel()))));
                             break;
                         default:
                     }

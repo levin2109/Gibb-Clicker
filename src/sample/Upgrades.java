@@ -39,12 +39,10 @@ public class Upgrades {
         if (!status) {
             ToolsJDBCDoa Tools = new ToolsJDBCDoa();
             long balance = (long) game.getBalance();
-            if (balance > price) {
+            if (balance >= price) {
                 game.setBalance(balance - price);
                 activate();
-
                 String toolname = Tools.getToolName(this.tool_ID);
-
                 for (Tools tool : toolsList) {
                     if (toolname.equals(tool.getName())) {
                         if (tool.getMultiplier() == 1) {

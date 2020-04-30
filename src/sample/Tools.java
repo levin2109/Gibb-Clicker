@@ -40,7 +40,7 @@ public class Tools {
             if (balance >= (price * (0.6*level))) {
                 game.setBalance(balance - (price * (0.6*level)));
                 level = level + 1;
-                moneyPerSecond = moneyPerScondNormal * level;
+                moneyPerSecond = moneyPerScondNormal * level * multiplier;
             }
         } else {
             if (balance >= price) {
@@ -55,13 +55,7 @@ public class Tools {
 
     //update MoneyPerSecond
     public void updateMoneyPerSecond() {
-
-        System.out.println(moneyPerSecond);
-        System.out.println(multiplier);
-        moneyPerSecond = moneyPerScondNormal * multiplier;
-
-        moneyPerSecond = moneyPerSecond * multiplier;
-
+        moneyPerSecond = moneyPerScondNormal * level * multiplier;
     }
 
     //load the Money per Second for the Player when he is back in the game
