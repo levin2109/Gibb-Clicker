@@ -1,88 +1,88 @@
-.btn_Gibb{
+.btnGibb{
     -fx-background-image: url("/sample/gibb.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-color: white;
 }
-.grid_main{
+.gridMain{
     -fx-background-color: white;
 }
-.label_tools{
+.labelTools{
     -fx-pref-width: 400px;
 }
-.label_tool_name{
+.labelToolName{
     -fx-pref-width: 200px;
     -fx-alignment: center;
     -fx-pref-height: 90px;
 }
-.label_tool_price{
+.labelToolPrice{
     -fx-pref-width: 200px;
     -fx-alignment: bottom-center;
     -fx-pref-height: 90px;
 }
-.label_level{
+.labelLevel{
     -fx-pref-width: 100px;
     -fx-alignment: center;
     -fx-font-size: 80px;
 }
-.grid_login{
+.gridLogin{
     -fx-background-color: white;
 }
-.powerup_Smartlearn{
+.powerupSmartlearn{
     -fx-background-image: url("/sample/Icons/Smartlearn.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Kantine{
+.powerupKantine{
     -fx-background-image: url("/sample/Icons/Kantine.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Heizung{
+.powerupHeizung{
     -fx-background-image: url("/sample/Icons/Heizung.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Klimaanlage{
+.powerupKlimaanlage{
     -fx-background-image: url("/sample/Icons/Klimaanlage.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Lehrer{
+.powerupLehrer{
     -fx-background-image: url("/sample/Icons/Lehrer.png");
     -fx-background-size: 70px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Pcs{
+.powerupPcs{
     -fx-background-image: url("/sample/Icons/Pcs.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_VMs{
+.powerupVMs{
     -fx-background-image: url("/sample/Icons/VMs.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_WCs{
+.powerupWCs{
     -fx-background-image: url("/sample/Icons/WCs.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Klangbruecke{
+.powerupKlangbruecke{
     -fx-background-image: url("/sample/Icons/Klangbruecke.png");
     -fx-background-size: 70px;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.powerup_Russische_Reviews{
+.powerupRussischeReviews{
     -fx-background-image: url("/sample/Icons/Russische_Reviews.png");
     -fx-background-size: 60px;
     -fx-background-position: center;
