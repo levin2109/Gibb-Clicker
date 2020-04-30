@@ -83,9 +83,9 @@ public class ToolsJDBCDoa {
     }
 
     //calculate the moneyPerSecond for a tool
-    public double calcMoneyPerSecond(int ID_Tools, String username) {
-        double money = 0;
-        double moneyPerSecond = 1;
+    public long calcMoneyPerSecond(int ID_Tools, String username) {
+        long money = 0;
+        long moneyPerSecond = 1;
         String sql = "Select MoneyPerSecond, Level from Tools join User_Tools on ID_Tools=Tools_ID join User on ID_User=User_ID where status = true && ID_Tools = ? && Username = ?";
         try {
             con = openConnection();
@@ -94,7 +94,7 @@ public class ToolsJDBCDoa {
             ps.setString(2,username);
             rs = ps.executeQuery();
             while (rs.next()) {
-                moneyPerSecond = rs.getFloat("MoneyPerSecond");
+                moneyPerSecond = rs.getInt("MoneyPerSecond");
                 int level = rs.getInt("Level");
                 money = moneyPerSecond * level;
             }

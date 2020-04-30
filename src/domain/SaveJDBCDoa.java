@@ -21,9 +21,6 @@ public class SaveJDBCDoa {
     public void saveTools(List<Tools> toolsList, int User_ID) {
         String sql = "Update User_Tools set Level = ?, Status = ? where User_ID = ? and Tools_ID = ?";
         try {
-            for (Tools tool : toolsList) {
-                System.out.println(tool.getName()+" "+tool.getLevel()+" "+tool.isStatus()+" "+User_ID+" "+tool.getToolID());
-            }
             con = openConnection();
             for (Tools tool : toolsList) {
                 ps = con.prepareStatement(sql);

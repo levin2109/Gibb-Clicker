@@ -1,6 +1,10 @@
 package sample;
 
 
+import domain.ToolsJDBCDoa;
+
+import java.util.List;
+
 public class Upgrades {
     private int ID_Upgrade;
     private String name;
@@ -28,13 +32,23 @@ public class Upgrades {
         status = true;
     }
 
-    public void buy(Gibb object) {
-        if (object.balance > price) {
-            double balance = object.getBalance();
-            object.setBalance(balance - price);
+    public void buy(Gibb game, List<Tools> toolsList) {
+        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+        long balance = game.getBalance();
+        if (balance > price) {
+            game.setBalance(balance - price);
             activate();
-        } else {
-            System.out.println("Du hast zu wenig Geld!");
+            String toolname = Tools.getToolName(this.Tool_ID);
+            for (Tools tool : toolsList) {
+                if (toolname.equals(tool.getName())) {
+                    if (tool.getMultiplier() == 1) {
+                        tool.setMultiplier(this.multiplier);
+                    } else {
+                        tool.setMultiplier(tool.getMultiplier()+this.multiplier);
+                    }
+                    tool.updateMoneyPerSecond();
+                }
+            }
         }
     }
 

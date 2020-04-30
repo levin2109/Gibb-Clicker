@@ -7,7 +7,7 @@ public class Tools {
     private long price;
     private int level;
     private boolean status;
-    private double moneyPerSecond;
+    private long moneyPerSecond;
     private int multiplier = 1;
     private long pricePerLevel;
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
@@ -16,7 +16,7 @@ public class Tools {
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Tools(String name, long price, int level, boolean status, double moneyPerSecond, int multiplier, long pricePerLevel) {
+    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier, long pricePerLevel) {
         this.name = name;
         this.price = price;
         this.level = level;
@@ -35,7 +35,7 @@ public class Tools {
 
     //buy this Tool
     public void buy(Gibb game) {
-        double balance = game.getBalance();
+        long balance = game.getBalance();
         if (level != 0) {
             if (balance >= (price + (pricePerLevel * level))) {
                 game.setBalance(balance - (price + (pricePerLevel * level)));
@@ -50,6 +50,13 @@ public class Tools {
                 moneyPerSecond = 1;
             }
         }
+    }
+
+    //update MoneyPerSecond
+    public void updateMoneyPerSecond() {
+        System.out.println(moneyPerSecond);
+        System.out.println(multiplier);
+        moneyPerSecond = moneyPerSecond * multiplier;
     }
 
     //load the Money per Second for the Player when he is back in the game
@@ -68,6 +75,7 @@ public class Tools {
         }
     }
 
+    //get the Tool ID with the toolname
     public int getToolID() {
         return Tools.getToolID(this.name);
     }
@@ -79,7 +87,7 @@ public class Tools {
         return multiplier;
     }
 
-    public double getMoneyPerSecond() {
+    public long getMoneyPerSecond() {
         return moneyPerSecond;
     }
 
@@ -114,7 +122,7 @@ public class Tools {
         this.multiplier = multiplier;
     }
 
-    public void setMoneyPerSecond(double moneyPerSecond) { this.moneyPerSecond = moneyPerSecond; }
+    public void setMoneyPerSecond(long moneyPerSecond) { this.moneyPerSecond = moneyPerSecond; }
 
     public void setStatus(boolean status) {
         this.status = status;

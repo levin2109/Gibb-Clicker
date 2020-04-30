@@ -24,14 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends Application {
+    private static List<Tools> toolsList = new ArrayList<>();
+    private static List<Upgrades> upgradesList = new ArrayList<>();
+    private static Gibb game = new Gibb(0);
+    private int ID_User;
+    private String username;
 
     /*-----------------------------------------------------
                  GUI Bauteile & Deklarationen
     ------------------------------------------------------*/
-    static List<Tools> toolsList = new ArrayList<>();
-    static List<Upgrades> upgradesList = new ArrayList<>();
-    String username;
-    Stage window;
     Scene login, scene1, registartion;
     Label label_powerups1, label_balance, label_moneyPerSecond, label_title, label_tools, label_login_username, label_login_password, label_login_title, label_login_verification,
             label_registration_username, label_registration_password1, label_registration_password2, label_registration_title, label_registration_verification;
@@ -39,7 +40,6 @@ public class GUI extends Application {
             btn_login, btn_login_registration, btn_registration, btn_registration_login;
     TextField username_login, username_registration;
     PasswordField password_login, password_registration1, password_registration2;
-    int ID_User;
 
     /*-----------------------------------
           create Objects from JDBC's
@@ -48,24 +48,13 @@ public class GUI extends Application {
     UserJDBCDoa User = new UserJDBCDoa();
     UpgradesJDBCDoa Upgrades = new UpgradesJDBCDoa();
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-    static Gibb game = new Gibb(0);
-    Main main = new Main();
 
     /*---------------------------------
                   methods
      --------------------------------*/
+    //start the GUI
     public void startApplication(String[] args) {
         launch(args);
-    }
-
-    public void setScene() {
-        if (scene1 == null) {
-            Scene scene = scene1();
-            window.setScene(scene);
-        } else {
-            window.setScene(scene1);
-        }
-        window.show();
     }
 
     public void start(Stage primaryStage) throws Exception {
@@ -98,6 +87,8 @@ public class GUI extends Application {
         label_login_password.setPadding(new Insets(0, 15, 0, 0));
         label_login_title.setFont(Font.font("Helvetica", 20));
         label_login_verification.setFont(Font.font("Helvetica", 0));
+
+        //check login and load game
         btn_login.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (event.getSource() == btn_login) {
@@ -113,7 +104,6 @@ public class GUI extends Application {
                                     tool.loadMultiplier(username_login.getText());
                                     tool.loadMoneyPerSecond(username_login.getText());
                                 }
-
                             }
                             username = username_login.getText();
                             ID_User = User.getUserID(username);
@@ -130,6 +120,7 @@ public class GUI extends Application {
             }
         });
 
+        //load registration after click on button
         btn_login_registration.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (event.getSource() == btn_login_registration) {
@@ -174,6 +165,8 @@ public class GUI extends Application {
         label_registration_password2.setPadding(new Insets(0, 15, 0, 0));
         label_registration_title.setFont(Font.font("Helvetica", 20));
         label_registration_verification.setFont(Font.font("Helvetica", 0));
+
+        //check the registration and write in database, load game
         btn_registration.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (event.getSource() == btn_registration) {
@@ -198,6 +191,8 @@ public class GUI extends Application {
                             for (int i = 1; i <= 40; i++) {
                                 Upgrades.registrateUpgrades(User_ID, i, false);
                             }
+                            toolsList = Tools.loadTools(username_registration.getText());
+                            username = username_registration.getText();
                             ID_User = User.getUserID(username_registration.getText());
                             primaryStage.setScene(scene1());
                             primaryStage.show();
@@ -210,6 +205,8 @@ public class GUI extends Application {
                 }
             }
         });
+
+        //load login after click on login button
         btn_registration_login.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (event.getSource() == btn_registration_login) {
@@ -218,6 +215,8 @@ public class GUI extends Application {
                 }
             }
         });
+
+        //Load login as first scene
         login = new Scene(grid_login, 300, 230);
         registartion = new Scene(grid_registration, 340, 250);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -245,10 +244,7 @@ public class GUI extends Application {
         grid_main.setMaxHeight(750);
         grid_main.setMinHeight(750);
 
-
-
         /* Power Ups */
-
         label_powerups1 = new Label("Powerups");
         int row = 1;
         float iButFloat = 0;
@@ -258,7 +254,6 @@ public class GUI extends Application {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
             }
-
             Button powerup = new Button();
             powerup.setText(upgradesList.get(i).getName());
             powerup.setMinWidth(70);
@@ -307,6 +302,7 @@ public class GUI extends Application {
                 default:
             }
         }
+
         //make function for every powerup
         for (Button btn : powerupsList) {
             btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -315,15 +311,14 @@ public class GUI extends Application {
                     String buttonPowerup = String.valueOf(btn.getText());
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
-                            System.out.println(upgradesList.get(i).getName()+" "+upgradesList.get(i).getPrice());
+                            upgradesList.get(i).buy(game,toolsList);
                         }
                     }
                 }
             });
         }
 
-
-
+        //add all GUI elements into grid
         grid_powerups.add(label_powerups1, 0, 0);
         label_powerups1.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_powerups1, 0.0);
@@ -431,17 +426,17 @@ public class GUI extends Application {
             toolButton.setPrefWidth(80);
             toolButton.setPrefHeight(80);
 
-            Label toolLabelName = new Label(Tools.loadTools(username_login.getText()).get(i).getName());
+            Label toolLabelName = new Label(Tools.loadTools(username).get(i).getName());
             grid_tools.add(toolLabelName, 1, i + 1);
             toolLabelName.getStyleClass().add("label_tool_name");
             toolsLabelName.add(toolLabelName);
 
-            Label toolLabelLevel = new Label(Integer.toString(Tools.loadTools(username_login.getText()).get(i).getLevel()));
+            Label toolLabelLevel = new Label(Integer.toString(Tools.loadTools(username).get(i).getLevel()));
             grid_tools.add(toolLabelLevel, 2, i + 1);
             toolLabelLevel.getStyleClass().add("label_level");
             toolsLabelLevel.add(toolLabelLevel);
 
-            Label toolLabelPrice = new Label(priceGeneratorLong(Tools.loadTools(username_login.getText()).get(i).getPrice() + (Tools.loadTools(username).get(i).getLevel() * Tools.loadTools(username).get(i).getPricePerLevel())));
+            Label toolLabelPrice = new Label(priceGeneratorLong(Tools.loadTools(username).get(i).getPrice() + (Tools.loadTools(username).get(i).getLevel() * Tools.loadTools(username).get(i).getPricePerLevel())));
             grid_tools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
@@ -510,7 +505,7 @@ public class GUI extends Application {
             });
         }
 
-
+        //Add all GUI elements(Tools) to grid
         grid_tools.add(label_tools, 0, 0);
         label_tools.setMaxWidth(Double.MAX_VALUE);
         AnchorPane.setLeftAnchor(label_tools, 0.0);
@@ -530,7 +525,6 @@ public class GUI extends Application {
 
 
         /* Main Grid */
-
         grid_main.getStyleClass().add("grid_main");
         btn_save = new Button("Spiel speichern");
         btn_exit = new Button("Spiel beenden");
@@ -548,12 +542,16 @@ public class GUI extends Application {
         AnchorPane.setRightAnchor(grid_stop, 0.0);
         grid_stop.setAlignment(Pos.CENTER);
         grid_stop.setHgap(10);
+        grid_main.setColumnSpan(label_title, 1500);
+
+        //make exit function
         btn_exit.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.exit(0);
             }
         });
-        grid_main.setColumnSpan(label_title, 1500);
+
+        //make save function
         btn_save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -563,11 +561,12 @@ public class GUI extends Application {
             }
         });
 
-
+        //styling from scene1
         scene1 = new Scene(grid_main, 1500, 775);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        AnimationTimer timer =  new AnimationTimer(){
 
+        //Thread (update labels)
+        AnimationTimer timer =  new AnimationTimer(){
             @Override
             public void handle(long now) {
                 try {
@@ -582,6 +581,7 @@ public class GUI extends Application {
         return scene1;
     }
 
+    //update labels (moneyPerSecond, balance)
     public void updateLabels() {
         if (toolsList.size() >= 1) {
             game.addMoney(toolsList);
@@ -593,38 +593,39 @@ public class GUI extends Application {
         }
     }
 
-    public String priceGeneratorLong(double number) {
+    //make balance label number with ' example: 1'000
+    public String priceGeneratorLong(long number) {
         String result = "";
         if (number >= 1000000 && number < 10000000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + "." + array_number[1] + array_number[2] + " Millionen CHF";
         } else if (number >= 1000 && number < 10000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + "'" + array_number[1] + array_number[2] + array_number[3] + " CHF";
         } else if (number >= 10000 && number < 100000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + array_number[1] + "'" + array_number[2] + array_number[3] + array_number[4] + " CHF";
         } else if (number >= 100000 && number < 1000000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + array_number[1] + array_number[2] + "'" + array_number[3] + array_number[4] + array_number[5] + " CHF";
         } else if (number >= 10000000 && number < 100000000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
@@ -632,7 +633,7 @@ public class GUI extends Application {
             result = array_number[0] + array_number[1] + "." + array_number[2] + " Millionen CHF";
         } else if (number >= 100000000 && number < 1000000000) {
             System.out.println(number);
-            result = Double.toString(number);
+            result = Long.toString(number);
             System.out.println(result);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
@@ -641,21 +642,21 @@ public class GUI extends Application {
             System.out.println(array_number);
             result = array_number[0] + array_number[1] + array_number[2] + "." + array_number[3] + " Millionen CHF";
         } else if (number >= 100 && number < 1000) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + array_number[1] + array_number[2] + " CHF";
         } else if (number >= 10 && number < 100) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
             result = array_number[0] + array_number[1] + " CHF";
         } else if (number >= 0 && number < 10) {
-            result = Double.toString(number);
+            result = Long.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
@@ -665,7 +666,53 @@ public class GUI extends Application {
             System.out.println("Fehler");
         }
         return (result);
+    }
 
+    /*--------------------------------------
+                    Getter
+    --------------------------------------*/
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getID_User() {
+        return ID_User;
+    }
+
+    public static Gibb getGame() {
+        return game;
+    }
+
+    public static List<sample.Upgrades> getUpgradesList() {
+        return upgradesList;
+    }
+
+    public static List<sample.Tools> getToolsList() {
+        return toolsList;
+    }
+    /*--------------------------------------
+                    Setter
+    --------------------------------------*/
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setID_User(int ID_User) {
+        this.ID_User = ID_User;
+    }
+
+    public static void setGame(Gibb game) {
+        GUI.game = game;
+    }
+
+    public static void setUpgradesList(List<sample.Upgrades> upgradesList) {
+        GUI.upgradesList = upgradesList;
+    }
+
+    public static void setToolsList(List<sample.Tools> toolsList) {
+        GUI.toolsList = toolsList;
     }
 }
 
