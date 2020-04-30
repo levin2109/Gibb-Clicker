@@ -20,7 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -253,6 +252,7 @@ public class GUI extends Application {
         label_powerups1 = new Label("Powerups");
         int row = 1;
         float iButFloat = 0;
+        upgradesList = Upgrades.loadUpgrades();
         List<Button> powerupsList = new ArrayList<>();
         for (int i = 0; i < Upgrades.loadUpgrades().size(); i++) {
             if (iButFloat / 5 % 1 == 0) {
@@ -260,6 +260,7 @@ public class GUI extends Application {
             }
 
             Button powerup = new Button();
+            powerup.setText(upgradesList.get(i).getName());
             powerup.setMinWidth(70);
             powerup.setMinHeight(70);
             grid_powerups.setHgap(9);
@@ -268,7 +269,7 @@ public class GUI extends Application {
             powerupsList.add(powerup);
             iButFloat = iButFloat + 1;
             String tooltip_text_name = "Name: " + Upgrades.loadUpgrades().get(i).getName();
-            String tooltip_text_price = "Preis: " + NumberFormat.getIntegerInstance().format(Upgrades.loadUpgrades().get(i).getPrice()) + " CHF";
+            String tooltip_text_price = "Preis: " + priceGeneratorLong(Upgrades.loadUpgrades().get(i).getPrice());
             String tooltip_text_multiplier = "Dein/e " + Tools.getToolName(Upgrades.loadUpgrades().get(i).getTool_ID()) + " nimmt " + Upgrades.loadUpgrades().get(i).getMultiplier() + "-mal so viel Geld ein.";
             Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltip_text_name + "\n" + tooltip_text_price + "\n" + tooltip_text_multiplier).prefWidth(300).wrapText(true).build();
             powerup.setTooltip(tooltipPowerup);
@@ -303,10 +304,24 @@ public class GUI extends Application {
                 case 10:
                     powerup.getStyleClass().add("powerup_Russische_Reviews");
                     break;
-
+                default:
             }
-
         }
+        //make function for every powerup
+        for (Button btn : powerupsList) {
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String buttonPowerup = String.valueOf(btn.getText());
+                    for (int i = 0; i < upgradesList.size(); i++) {
+                        if (buttonPowerup.equals(upgradesList.get(i).getName())) {
+                            System.out.println(upgradesList.get(i).getName()+" "+upgradesList.get(i).getPrice());
+                        }
+                    }
+                }
+            });
+        }
+
 
 
         grid_powerups.add(label_powerups1, 0, 0);
@@ -327,13 +342,13 @@ public class GUI extends Application {
 
 
         /* Center */
-        label_balance = new Label(game.getBalance() + " $");
+        label_balance = new Label(priceGeneratorLong(game.getBalance()));
         btn_Gibb = new Button();
         btn_Gibb.setPrefHeight(800);
         btn_Gibb.setPrefWidth(1500);
         btn_Gibb.getStyleClass().add("btn_Gibb");
 
-        label_moneyPerSecond = new Label(game.calcMoneyPerSecond(toolsList) + "$ pro Sekunde");
+        label_moneyPerSecond = new Label(priceGeneratorLong(game.calcMoneyPerSecond(toolsList)) + " pro Sekunde");
         label_title = new Label("GIBB Clicker");
         grid_center.add(label_moneyPerSecond, 0, 1);
         grid_center.add(btn_Gibb, 0, 2);
@@ -426,19 +441,18 @@ public class GUI extends Application {
             toolLabelLevel.getStyleClass().add("label_level");
             toolsLabelLevel.add(toolLabelLevel);
 
-            Label toolLabelPrice = new Label(Long.toString(Tools.loadTools(username_login.getText()).get(i).getPrice() + (Tools.loadTools(username).get(i).getLevel() * Tools.loadTools(username).get(i).getPricePerLevel())));
+            Label toolLabelPrice = new Label(priceGeneratorLong(Tools.loadTools(username_login.getText()).get(i).getPrice() + (Tools.loadTools(username).get(i).getLevel() * Tools.loadTools(username).get(i).getPricePerLevel())));
             grid_tools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("label_tool_price");
             toolsLabelPrice.add(toolLabelPrice);
-        }
 
+        }
         //make the function for every tool
         for (Button btn : toolsButton) {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     String c = String.valueOf(btn.getStyleClass());
-                    System.out.println(c);
                     switch (c) {
                         case "button powerup_Smartlearn":
                             toolsList.get(0).buy(game);
@@ -495,6 +509,7 @@ public class GUI extends Application {
                 }
             });
         }
+
 
         grid_tools.add(label_tools, 0, 0);
         label_tools.setMaxWidth(Double.MAX_VALUE);
@@ -572,56 +587,50 @@ public class GUI extends Application {
             game.addMoney(toolsList);
         }
         if (label_balance != null) {
-            int balance = (int) game.getBalance();
-            label_balance.setText(balance + " $");
-            int moneyPerSecond = (int) game.calcMoneyPerSecond(toolsList);
-            label_moneyPerSecond.setText(moneyPerSecond + "$ pro Sekunde");
+            String balance = priceGeneratorLong(game.getBalance());
+            label_balance.setText(balance);
+            label_moneyPerSecond.setText(priceGeneratorLong(game.calcMoneyPerSecond(toolsList))  + " pro Sekunde");
         }
     }
 
     public String priceGeneratorLong(double number) {
         String result = "";
-        if (number > 1000000 && number < 10000000) {
+        if (number >= 1000000 && number < 10000000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+"."+array_number[1]+array_number[2]+array_number[3]+" Millionen CHF";
-        }
-        else if (number > 1000 && number < 10000) {
+            result = array_number[0] + "." + array_number[1] + array_number[2] + " Millionen CHF";
+        } else if (number >= 1000 && number < 10000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+"'"+array_number[1]+array_number[2]+array_number[3]+ " CHF";
-        }
-        else if (number > 10000 && number < 100000) {
+            result = array_number[0] + "'" + array_number[1] + array_number[2] + array_number[3] + " CHF";
+        } else if (number >= 10000 && number < 100000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+array_number[1]+"'"+array_number[2]+array_number[3]+array_number[4]+ " CHF";
-        }
-        else if (number > 100000 && number < 1000000) {
+            result = array_number[0] + array_number[1] + "'" + array_number[2] + array_number[3] + array_number[4] + " CHF";
+        } else if (number >= 100000 && number < 1000000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+array_number[1]+array_number[2]+array_number[3]+array_number[4]+array_number[5]+ " CHF";
-        }
-        else if (number > 10000000 && number < 100000000) {
+            result = array_number[0] + array_number[1] + array_number[2] + "'" + array_number[3] + array_number[4] + array_number[5] + " CHF";
+        } else if (number >= 10000000 && number < 100000000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+array_number[1]+"."+array_number[2]+array_number[3]+" Millionen CHF";
-        }
-        else if (number > 100000000 && number < 1000000000) {
+            result = array_number[0] + array_number[1] + "." + array_number[2] + " Millionen CHF";
+        } else if (number >= 100000000 && number < 1000000000) {
             System.out.println(number);
             result = Double.toString(number);
             System.out.println(result);
@@ -630,21 +639,33 @@ public class GUI extends Application {
                 array_number[i] = result.charAt(i);
             }
             System.out.println(array_number);
-            result = array_number[0]+array_number[1]+array_number[2]+"."+array_number[3]+" Millionen CHF";
-        }
-        else if (number > 1000000000 && number < 2147483647) {
+            result = array_number[0] + array_number[1] + array_number[2] + "." + array_number[3] + " Millionen CHF";
+        } else if (number >= 100 && number < 1000) {
             result = Double.toString(number);
             char[] array_number = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
                 array_number[i] = result.charAt(i);
             }
-            result = array_number[0]+"."+array_number[1]+array_number[2]+array_number[3]+" Milliarden CHF";
+            result = array_number[0] + array_number[1] + array_number[2] + " CHF";
+        } else if (number >= 10 && number < 100) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0] + array_number[1] + " CHF";
+        } else if (number >= 0 && number < 10) {
+            result = Double.toString(number);
+            char[] array_number = new char[result.length()];
+            for (int i = 0; i < result.length(); i++) {
+                array_number[i] = result.charAt(i);
+            }
+            result = array_number[0] + " CHF";
+        } else {
+            System.out.println("Fehler");
         }
-        else{
-            result = Double.toString(number)+" CHF";
-        }
-
         return (result);
 
     }
 }
+
