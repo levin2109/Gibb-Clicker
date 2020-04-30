@@ -75,7 +75,7 @@ public class ToolsJDBCDoa {
                 } else {
                     moneyPerSecond = rs.getLong("MoneyPerSecond");
                 }
-                all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), moneyPerSecond, 0));
+                all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), moneyPerSecond, 0, rs.getLong("MoneyPerSecond")));
             }
             closeConnection();
             rs.close();
