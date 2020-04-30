@@ -83,7 +83,6 @@ public class ToolsJDBCDoa {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return all;
     }
 
