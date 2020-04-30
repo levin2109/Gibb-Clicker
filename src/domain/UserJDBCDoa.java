@@ -47,7 +47,6 @@ public class UserJDBCDoa {
             rs = ps.executeQuery();
             if (rs.next()) {
                 balance = rs.getLong("Balance");
-                System.out.println(balance);
             }
             closeConnection();
             rs.close();
