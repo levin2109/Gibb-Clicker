@@ -38,7 +38,7 @@ public class Upgrades {
     public void buy(Gibb game, List<Tools> toolsList) {
         if (!status) {
             ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-            long balance = game.getBalance();
+            long balance = (long) game.getBalance();
             if (balance > price) {
                 game.setBalance(balance - price);
                 activate();
