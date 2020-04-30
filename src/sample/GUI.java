@@ -598,70 +598,70 @@ public class GUI extends Application {
         String result = "";
         if (number >= 1000000 && number < 10000000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + "." + array_number[1] + array_number[2] + " Millionen CHF";
+            result = arrayNumber[0] + "." + arrayNumber[1] + arrayNumber[2] + " Millionen CHF";
         } else if (number >= 1000 && number < 10000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + "'" + array_number[1] + array_number[2] + array_number[3] + " CHF";
+            result = arrayNumber[0] + "'" + arrayNumber[1] + arrayNumber[2] + arrayNumber[3] + " CHF";
         } else if (number >= 10000 && number < 100000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + array_number[1] + "'" + array_number[2] + array_number[3] + array_number[4] + " CHF";
+            result = arrayNumber[0] + arrayNumber[1] + "'" + arrayNumber[2] + arrayNumber[3] + arrayNumber[4] + " CHF";
         } else if (number >= 100000 && number < 1000000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + array_number[1] + array_number[2] + "'" + array_number[3] + array_number[4] + array_number[5] + " CHF";
+            result = arrayNumber[0] + arrayNumber[1] + arrayNumber[2] + "'" + arrayNumber[3] + arrayNumber[4] + arrayNumber[5] + " CHF";
         } else if (number >= 10000000 && number < 100000000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + array_number[1] + "." + array_number[2] + " Millionen CHF";
+            result = arrayNumber[0] + arrayNumber[1] + "." + arrayNumber[2] + " Millionen CHF";
         } else if (number >= 100000000 && number < 1000000000) {
             System.out.println(number);
             result = Long.toString(number);
             System.out.println(result);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            System.out.println(array_number);
-            result = array_number[0] + array_number[1] + array_number[2] + "." + array_number[3] + " Millionen CHF";
+            System.out.println(arrayNumber);
+            result = arrayNumber[0] + arrayNumber[1] + arrayNumber[2] + "." + arrayNumber[3] + " Millionen CHF";
         } else if (number >= 100 && number < 1000) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + array_number[1] + array_number[2] + " CHF";
+            result = arrayNumber[0] + arrayNumber[1] + arrayNumber[2] + " CHF";
         } else if (number >= 10 && number < 100) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + array_number[1] + " CHF";
+            result = arrayNumber[0] + arrayNumber[1] + " CHF";
         } else if (number >= 0 && number < 10) {
             result = Long.toString(number);
-            char[] array_number = new char[result.length()];
+            char[] arrayNumber = new char[result.length()];
             for (int i = 0; i < result.length(); i++) {
-                array_number[i] = result.charAt(i);
+                arrayNumber[i] = result.charAt(i);
             }
-            result = array_number[0] + " CHF";
+            result = arrayNumber[0] + " CHF";
         } else {
             System.out.println("Fehler");
         }

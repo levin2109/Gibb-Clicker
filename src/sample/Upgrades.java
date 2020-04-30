@@ -6,9 +6,9 @@ import domain.ToolsJDBCDoa;
 import java.util.List;
 
 public class Upgrades {
-    private int ID_Upgrade;
+    private int id_upgrade;
     private String name;
-    private int Tool_ID;
+    private int tool_id;
     private int multiplier;
     private long price;
     private boolean status;
@@ -16,10 +16,10 @@ public class Upgrades {
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Upgrades(int ID_Upgrade, String name, int Tool_ID, int multiplier, long price, boolean status) {
-        this.ID_Upgrade = ID_Upgrade;
+    public Upgrades(int id_upgrade, String name, int tool_id, int multiplier, long price, boolean status) {
+        this.id_upgrade = id_upgrade;
         this.name = name;
-        this.Tool_ID = Tool_ID;
+        this.tool_id = tool_id;
         this.multiplier = multiplier;
         this.price = price;
         this.status = status;
@@ -38,7 +38,7 @@ public class Upgrades {
         if (balance > price) {
             game.setBalance(balance - price);
             activate();
-            String toolname = Tools.getToolName(this.Tool_ID);
+            String toolname = Tools.getToolName(this.tool_id);
             for (Tools tool : toolsList) {
                 if (toolname.equals(tool.getName())) {
                     if (tool.getMultiplier() == 1) {
@@ -68,7 +68,7 @@ public class Upgrades {
     }
 
     public int getTool_ID() {
-        return Tool_ID;
+        return tool_id;
     }
 
     public String getName() {
@@ -76,7 +76,7 @@ public class Upgrades {
     }
 
     public int getID_Upgrade() {
-        return ID_Upgrade;
+        return id_upgrade;
     }
 
     /*------------------------------------------------
@@ -95,18 +95,18 @@ public class Upgrades {
     }
 
     public void setObject(int Tool_ID) {
-        this.Tool_ID = Tool_ID;
+        this.tool_id = Tool_ID;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setID_Upgrade(int ID_Upgrade) {
-        this.ID_Upgrade = ID_Upgrade;
+    public void setID_Upgrade(int id_upgrade) {
+        this.id_upgrade = id_upgrade;
     }
 
     public void setTool_ID(int tool_ID) {
-        Tool_ID = tool_ID;
+        tool_id = tool_ID;
     }
 }
