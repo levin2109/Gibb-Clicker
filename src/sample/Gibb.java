@@ -44,7 +44,7 @@ public class Gibb {
     }
 
     public long addMoney(List<Tools> toolsList) {
-        addBalance(calcMoneyPerSecond(toolsList)/5);
+        addBalance(calcMoneyPerSecond(toolsList) / 5);
         return calcMoneyPerSecond(toolsList) / 5;
     }
     /*------------------------------------------------

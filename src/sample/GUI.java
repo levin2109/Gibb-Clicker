@@ -25,6 +25,7 @@ import java.util.List;
 
 public class GUI extends Application {
     private static List<Tools> toolsList = new ArrayList<>();
+    private List<Button> powerupsList = new ArrayList<>();
     private static List<Upgrades> upgradesList = new ArrayList<>();
     private static Gibb game = new Gibb(0);
     private int idUser;
@@ -99,9 +100,6 @@ public class GUI extends Application {
                     } else {
                         if (User.checkPassword(usernameLogin.getText(), passwordLogin.getText())) {
                             toolsList = Tools.loadTools(usernameLogin.getText());
-                            for (Tools tool : toolsList) {
-                                System.out.println(tool.getName()+" "+tool.getLevel()+" "+tool.getMoneyPerSecond()+" "+tool.getPricePerLevel()+" "+tool.getMultiplier()+" "+tool.isStatus());
-                            }
                             for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(usernameLogin.getText());
@@ -252,13 +250,12 @@ public class GUI extends Application {
         int row = 1;
         float iButFloat = 0;
         upgradesList = Upgrades.loadUpgrades();
-        List<Button> powerupsList = new ArrayList<>();
         for (int i = 0; i < Upgrades.loadUpgrades().size(); i++) {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
             }
             Button powerup = new Button();
-            powerup.setText(upgradesList.get(i).getName());
+            powerup.setId(upgradesList.get(i).getName());
             powerup.setMinWidth(70);
             powerup.setMinHeight(70);
             gridPowerups.setHgap(9);
@@ -311,11 +308,11 @@ public class GUI extends Application {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String buttonPowerup = String.valueOf(btn.getText());
+                    String buttonPowerup = String.valueOf(btn.getId());
+                    System.out.println(buttonPowerup);
                     for (int i = 0; i < upgradesList.size(); i++) {
                         if (buttonPowerup.equals(upgradesList.get(i).getName())) {
                             upgradesList.get(i).buy(game,toolsList);
-
                         }
                     }
                 }
@@ -466,9 +463,6 @@ public class GUI extends Application {
                             break;
                         case "button powerupLehrer":
                             toolsList.get(2).buy(game);
-                            for (Tools tool : toolsList) {
-                                System.out.println(tool.getName()+" "+tool.getLevel()+" "+tool.getMoneyPerSecond()+" "+tool.getPricePerLevel()+" "+tool.getMultiplier());
-                            }
                             System.out.println("inside Lehrer");
                             toolsLabelLevel.get(2).setText(String.valueOf(toolsList.get(2).getLevel()));
                             toolsLabelPrice.get(2).setText(priceGeneratorLong(toolsList.get(2).getPrice()+(toolsList.get(2).getPricePerLevel()*toolsList.get(2).getLevel())));
@@ -576,19 +570,32 @@ public class GUI extends Application {
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
         //Thread (update labels)
+        final long[] sleep = {0};
         AnimationTimer timer =  new AnimationTimer(){
             @Override
             public void handle(long now) {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                sleep[0]++;
+                if (sleep[0] % 22 == 0) {
+                    updateLabels();
+                    checkPowerup();
                 }
-                updateLabels();
             }
         };
         timer.start();
         return scene1;
+    }
+
+    //check the powerups and give new backgroundcolor
+    public void checkPowerup() {
+        for (int i = 0; i < upgradesList.size(); i++) {
+            if (upgradesList.get(i).isStatus()) {
+                powerupsList.get(i).setStyle("-fx-background-color: green");
+            } else if (upgradesList.get(i).getPrice() <= game.getBalance()) {
+                powerupsList.get(i).setStyle("-fx-background-color: blue");
+            } else {
+                powerupsList.get(i).setStyle("-fx-background-color: red");
+            }
+        }
     }
 
     //update labels (moneyPerSecond, balance)
