@@ -9,19 +9,21 @@ public class Tools {
     private boolean status;
     private long moneyPerSecond;
     private int multiplier = 1;
+    private long moneyPerScondNormal;
     ToolsJDBCDoa Tools = new ToolsJDBCDoa();
 
 
     /*------------------------------------------------
                         Constructor
     ------------------------------------------------*/
-    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier) {
+    public Tools(String name, long price, int level, boolean status, long moneyPerSecond, int multiplier, long moneyPerScondNormal) {
         this.name = name;
         this.price = price;
         this.level = level;
         this.status = status;
         this.moneyPerSecond = moneyPerSecond;
         this.multiplier = multiplier;
+        this.moneyPerScondNormal = moneyPerScondNormal;
     }
     /*------------------------------------------------
                          Methods
@@ -38,7 +40,7 @@ public class Tools {
             if (balance >= (price * (0.6*level))) {
                 game.setBalance(balance - (price * (0.6*level)));
                 level = level + 1;
-                moneyPerSecond = moneyPerSecond * level;
+                moneyPerSecond = moneyPerScondNormal * level;
             }
         } else {
             if (balance >= price) {
@@ -46,7 +48,7 @@ public class Tools {
                 multiplier = 1;
                 activate();
                 level = level + 1;
-                moneyPerSecond = moneyPerSecond * multiplier;
+                moneyPerSecond = moneyPerScondNormal * multiplier;
             }
         }
     }
@@ -55,7 +57,7 @@ public class Tools {
     public void updateMoneyPerSecond() {
         System.out.println(moneyPerSecond);
         System.out.println(multiplier);
-        moneyPerSecond = moneyPerSecond * multiplier;
+        moneyPerSecond = moneyPerScondNormal * multiplier;
     }
 
     //load the Money per Second for the Player when he is back in the game
