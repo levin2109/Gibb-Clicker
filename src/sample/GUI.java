@@ -101,6 +101,7 @@ public class GUI extends Application {
                     } else {
                         if (User.checkPassword(usernameLogin.getText(), passwordLogin.getText())) {
                             toolsList = Tools.loadTools(usernameLogin.getText());
+                            upgradesList = Upgrades.loadUpgrades(usernameLogin.getText());
                             for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(usernameLogin.getText());
@@ -108,6 +109,7 @@ public class GUI extends Application {
                                     tool.loadMoneyPerSecond(usernameLogin.getText());
                                 }
                             }
+                            game.loadMultiplier(upgradesList);
                             username = usernameLogin.getText();
                             idUser = User.getUserID(username);
                             game.loadBalance(username);
@@ -249,8 +251,7 @@ public class GUI extends Application {
         labelPowerups1 = new Label("Powerups");
         int row = 1;
         float iButFloat = 0;
-        upgradesList = Upgrades.loadUpgrades();
-        for (int i = 0; i < Upgrades.loadUpgrades().size(); i++) {
+        for (int i = 0; i < upgradesList.size(); i++) {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
             }
@@ -263,12 +264,12 @@ public class GUI extends Application {
             gridPowerups.add(powerup, i % 5, row);
             powerupsList.add(powerup);
             iButFloat = iButFloat + 1;
-            String tooltipTextName = "Name: " + Upgrades.loadUpgrades().get(i).getName();
-            String tooltipTextPrice = "Preis: " + priceGeneratorLong(Upgrades.loadUpgrades().get(i).getPrice());
-            String tooltipTextMultiplier = "Dein/e " + Tools.getToolName(Upgrades.loadUpgrades().get(i).getTool_ID()) + " nimmt " + Upgrades.loadUpgrades().get(i).getMultiplier() + "-mal so viel Geld ein.";
+            String tooltipTextName = "Name: " + upgradesList.get(i).getName();
+            String tooltipTextPrice = "Preis: " + upgradesList.get(i).getPrice();
+            String tooltipTextMultiplier = "Dein/e " + Tools.getToolName(upgradesList.get(i).getTool_ID()) + " nimmt " + upgradesList.get(i).getMultiplier() + "-mal so viel Geld ein.";
             Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltipTextName + "\n" + tooltipTextPrice + "\n" + tooltipTextMultiplier).prefWidth(300).wrapText(true).build();
             powerup.setTooltip(tooltipPowerup);
-            switch (Upgrades.loadUpgrades().get(i).getTool_ID()) {
+            switch (upgradesList.get(i).getTool_ID()) {
                 case 1:
                     powerup.getStyleClass().add("powerupSmartlearn");
                     break;
@@ -475,7 +476,7 @@ public class GUI extends Application {
                             toolsLabelLevel.get(3).setText(String.valueOf(toolsList.get(3).getLevel()));
                             toolsLabelPrice.get(3).setText(priceGeneratorLong((long) (toolsList.get(3).getPrice()*(1.6*toolsList.get(3).getLevel()))));
                             break;
-                        case "button powerupPCs":
+                        case "button powerupPcs":
                             toolsList.get(4).buy(game);
                             toolsLabelLevel.get(4).setText(String.valueOf(toolsList.get(4).getLevel()));
                             toolsLabelPrice.get(4).setText(priceGeneratorLong((long) (toolsList.get(4).getPrice()*(1.6*toolsList.get(4).getLevel()))));
@@ -495,7 +496,7 @@ public class GUI extends Application {
                             toolsLabelLevel.get(7).setText(String.valueOf(toolsList.get(7).getLevel()));
                             toolsLabelPrice.get(7).setText(priceGeneratorLong((long) (toolsList.get(7).getPrice()*(1.6*toolsList.get(7).getLevel()))));
                             break;
-                        case "button powerupKlangbrueche":
+                        case "button powerupKlangbruecke":
                             toolsList.get(8).buy(game);
                             toolsLabelLevel.get(8).setText(String.valueOf(toolsList.get(8).getLevel()));
                             toolsLabelPrice.get(8).setText(priceGeneratorLong((long) (toolsList.get(8).getPrice()*(1.6*toolsList.get(8).getLevel()))));

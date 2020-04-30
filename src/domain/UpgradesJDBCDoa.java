@@ -18,16 +18,17 @@ public class UpgradesJDBCDoa {
         Methods for Users (Login & Registration)
      --------------------------------------------*/
     //create all upgrade-objects from database
-    public List<Upgrades> loadUpgrades() {
+    public List<Upgrades> loadUpgrades(String username) {
         List<Upgrades> all = new ArrayList<>();
 
-        String sql = "Select * from Upgrades order by price asc";
+        String sql = "Select ID_Upgrades, Name, Upgrades.Tools_ID, Multiplier, Price, Status from Upgrades join User_Upgrades on ID_Upgrades=Upgrades_ID join User on ID_User=User_ID where username = ? order by price asc";
         try {
             con = openConnection();
             ps = con.prepareStatement(sql);
+            ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
-                all.add(new Upgrades(rs.getInt("ID_Upgrades"), rs.getString("Name"), rs.getInt("Tools_ID"), rs.getInt("Multiplier"), rs.getLong("Price"), false));
+                all.add(new Upgrades(rs.getInt("ID_Upgrades"), rs.getString("Name"), rs.getInt("Tools_ID"), rs.getInt("Multiplier"), rs.getLong("Price"), rs.getBoolean("Status")));
             }
             closeConnection();
             rs.close();
