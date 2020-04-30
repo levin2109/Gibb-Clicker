@@ -560,7 +560,6 @@ public class GUI extends Application {
                 System.exit(0);
             }
         });
-
         //make save function
         btnSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -579,11 +578,6 @@ public class GUI extends Application {
         AnimationTimer timer =  new AnimationTimer(){
             @Override
             public void handle(long now) {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 updateLabels();
             }
         };
