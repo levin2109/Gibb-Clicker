@@ -36,22 +36,24 @@ public class Upgrades {
     }
 
     public void buy(Gibb game, List<Tools> toolsList) {
-        ToolsJDBCDoa Tools = new ToolsJDBCDoa();
-        long balance = game.getBalance();
-        if (balance > price) {
-            game.setBalance(balance - price);
-            activate();
+        if (!status) {
+            ToolsJDBCDoa Tools = new ToolsJDBCDoa();
+            long balance = game.getBalance();
+            if (balance > price) {
+                game.setBalance(balance - price);
+                activate();
 
-            String toolname = Tools.getToolName(this.tool_ID);
+                String toolname = Tools.getToolName(this.tool_ID);
 
-            for (Tools tool : toolsList) {
-                if (toolname.equals(tool.getName())) {
-                    if (tool.getMultiplier() == 1) {
-                        tool.setMultiplier(this.multiplier);
-                    } else {
-                        tool.setMultiplier(tool.getMultiplier()+this.multiplier);
+                for (Tools tool : toolsList) {
+                    if (toolname.equals(tool.getName())) {
+                        if (tool.getMultiplier() == 1) {
+                            tool.setMultiplier(this.multiplier);
+                        } else {
+                            tool.setMultiplier(tool.getMultiplier() + this.multiplier);
+                        }
+                        tool.updateMoneyPerSecond();
                     }
-                    tool.updateMoneyPerSecond();
                 }
             }
         }

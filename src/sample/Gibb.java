@@ -36,7 +36,9 @@ public class Gibb {
     public long calcMoneyPerSecond(List<Tools> toolsList) {
         long money = 0;
         for (Tools tool : toolsList) {
-            money = money + tool.getMoneyPerSecond();
+            if (tool.isStatus()) {
+                money = money + tool.getMoneyPerSecond();
+            }
         }
         return money;
     }

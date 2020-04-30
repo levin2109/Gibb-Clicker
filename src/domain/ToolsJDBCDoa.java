@@ -62,7 +62,7 @@ public class ToolsJDBCDoa {
     //create all tool-objects from database
     public List<Tools> loadTools(String username) {
         List<Tools> all = new ArrayList<>();
-
+        long moneyPerSecond;
         String sql = "Select Name, Price, Level, Status, MoneyPerSecond, PricePerLevel from Tools join User_Tools on ID_Tools=Tools_ID join User on ID_User=User_ID where Username = ?";
         try {
             con = openConnection();
@@ -70,7 +70,11 @@ public class ToolsJDBCDoa {
             ps.setString(1,username);
             rs = ps.executeQuery();
             while (rs.next()) {
-                long moneyPerSecond = rs.getInt("Level") * rs.getLong("MoneyPerSecond");
+                if (rs.getInt("Level") != 0) {
+                    moneyPerSecond = rs.getInt("Level") * rs.getLong("MoneyPerSecond");
+                } else {
+                    moneyPerSecond = rs.getLong("MoneyPerSecond");
+                }
                 all.add(new Tools(rs.getString("Name"), rs.getLong("Price"), rs.getInt("Level"), rs.getBoolean("Status"), moneyPerSecond, 0, rs.getLong("PricePerLevel")));
             }
             closeConnection();
@@ -79,6 +83,7 @@ public class ToolsJDBCDoa {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return all;
     }
 

@@ -45,9 +45,10 @@ public class Tools {
         } else {
             if (balance >= price) {
                 game.setBalance(balance - price);
+                multiplier = 1;
                 activate();
                 level = level + 1;
-                moneyPerSecond = 1;
+                moneyPerSecond = moneyPerSecond * multiplier;
             }
         }
     }
