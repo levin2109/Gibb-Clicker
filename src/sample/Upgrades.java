@@ -6,9 +6,11 @@ import domain.ToolsJDBCDoa;
 import java.util.List;
 
 public class Upgrades {
+
     private int id_Upgrade;
     private String name;
     private int tool_ID;
+
     private int multiplier;
     private long price;
     private boolean status;
@@ -20,6 +22,7 @@ public class Upgrades {
         this.id_Upgrade = id_upgrade;
         this.name = name;
         this.tool_ID = tool_id;
+
         this.multiplier = multiplier;
         this.price = price;
         this.status = status;
@@ -38,7 +41,9 @@ public class Upgrades {
         if (balance > price) {
             game.setBalance(balance - price);
             activate();
+
             String toolname = Tools.getToolName(this.tool_ID);
+
             for (Tools tool : toolsList) {
                 if (toolname.equals(tool.getName())) {
                     if (tool.getMultiplier() == 1) {
