@@ -104,6 +104,7 @@ public class GUI extends Application {
                             for (Tools tool : toolsList) {
                                 if (tool.isStatus() == true) {
                                     tool.loadMultiplier(usernameLogin.getText());
+                                    tool.updatePrice(tool.getToolID(), usernameLogin.getText());
                                     tool.loadMoneyPerSecond(usernameLogin.getText());
                                 }
                             }
@@ -425,17 +426,17 @@ public class GUI extends Application {
             toolButton.setPrefWidth(80);
             toolButton.setPrefHeight(80);
 
-            Label toolLabelName = new Label(Tools.loadTools(username).get(i).getName());
+            Label toolLabelName = new Label(toolsList.get(i).getName());
             gridTools.add(toolLabelName, 1, i + 1);
             toolLabelName.getStyleClass().add("labelToolName");
             toolsLabelName.add(toolLabelName);
 
-            Label toolLabelLevel = new Label(Integer.toString(Tools.loadTools(username).get(i).getLevel()));
+            Label toolLabelLevel = new Label(Integer.toString(toolsList.get(i).getLevel()));
             gridTools.add(toolLabelLevel, 2, i + 1);
             toolLabelLevel.getStyleClass().add("labelLevel");
             toolsLabelLevel.add(toolLabelLevel);
 
-            Label toolLabelPrice = new Label(priceGeneratorLong((long) (Tools.loadTools(username).get(i).getPrice())));
+            Label toolLabelPrice = new Label(priceGeneratorLong((long) (toolsList.get(i).getPrice())));
             gridTools.add(toolLabelPrice, 1, i + 1);
             toolLabelPrice.getStyleClass().add("labelToolPrice");
             toolsLabelPrice.add(toolLabelPrice);
