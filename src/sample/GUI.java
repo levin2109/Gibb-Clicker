@@ -197,6 +197,7 @@ public class GUI extends Application {
                                 Upgrades.registrateUpgrades(userId, i, false);
                             }
                             toolsList = Tools.loadTools(usernameRegistration.getText());
+                            upgradesList = Upgrades.loadUpgrades(usernameRegistration.getText());
                             username = usernameRegistration.getText();
                             idUser = User.getUserID(usernameRegistration.getText());
                             primaryStage.setScene(scene1());
