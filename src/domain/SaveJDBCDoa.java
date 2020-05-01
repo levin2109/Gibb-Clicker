@@ -22,14 +22,14 @@ public class SaveJDBCDoa {
         String sql = "Update User_Tools set Level = ?, Status = ?, Price = ? where User_ID = ? and Tools_ID = ?";
         try {
             con = openConnection();
-            for (Tools tool : toolsList) {
-                long price = (long) (tool.getPrice());
+            for(int i = 0; i < toolsList.size(); i++) {
+                long price = (long) (toolsList.get(i).getPrice());
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, tool.getLevel());
-                ps.setBoolean(2,tool.isStatus());
+                ps.setInt(1, toolsList.get(i).getLevel());
+                ps.setBoolean(2,toolsList.get(i).isStatus());
                 ps.setLong(3, price);
                 ps.setInt(4, User_ID);
-                ps.setInt(5, tool.getToolID());
+                ps.setInt(5, toolsList.get(i).getToolID());
                 ps.execute();
             }
             closeConnection();

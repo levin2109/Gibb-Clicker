@@ -1,9 +1,9 @@
 package sample;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class JUnitTest1 {
-    @Test
+   // @Test
     public void updateMoneyPerSecondTest() {
         long moneyPerSecond = 0;
         long moneyPerSecondNormal = 10;
