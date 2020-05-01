@@ -161,6 +161,17 @@
     -fx-border-width: 5px;
     -fx-border-radius: 4px;
 }
+.labelPowerups{
+    -fx-pref-width: 400px;
+}
+.controlButtons{
+    -fx-font-size: 14px;
+    -fx-font-weight: 300;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 4px;
+    -fx-border-width: 2px;
+}
 
 
 
