@@ -253,6 +253,7 @@ public class GUI extends Application {
         labelPowerups1 = new Label("Powerups");
         int row = 1;
         float iButFloat = 0;
+        gridPowerups.add(labelPowerups1, 0, 0);
         for (int i = 0; i < upgradesList.size(); i++) {
             if (iButFloat / 5 % 1 == 0) {
                 row++;
@@ -267,7 +268,7 @@ public class GUI extends Application {
             powerupsList.add(powerup);
             iButFloat = iButFloat + 1;
             String tooltipTextName = "Name: " + upgradesList.get(i).getName();
-            String tooltipTextPrice = "Preis: " + upgradesList.get(i).getPrice();
+            String tooltipTextPrice = "Preis: " + priceGeneratorLong(upgradesList.get(i).getPrice());
             String tooltipTextMultiplier = "Dein/e " + Tools.getToolName(upgradesList.get(i).getTool_ID()) + " nimmt " + upgradesList.get(i).getMultiplier() + "-mal so viel Geld ein.";
             Tooltip tooltipPowerup = TooltipBuilder.create().text(tooltipTextName + "\n" + tooltipTextPrice + "\n" + tooltipTextMultiplier).prefWidth(300).wrapText(true).build();
             powerup.setTooltip(tooltipPowerup);
@@ -326,12 +327,9 @@ public class GUI extends Application {
         }
 
         //add all GUI elements into grid
-        gridPowerups.add(labelPowerups1, 0, 0);
-        labelPowerups1.setMaxWidth(Double.MAX_VALUE);
-        AnchorPane.setLeftAnchor(labelPowerups1, 0.0);
-        AnchorPane.setRightAnchor(labelPowerups1, 0.0);
         labelPowerups1.setAlignment(Pos.CENTER);
-        gridMain.setColumnSpan(labelPowerups1, 400);
+        labelPowerups1.getStyleClass().add("labelPowerups");
+        gridPowerups.setColumnSpan(labelPowerups1, 400);
         gridPowerups.setMinWidth(400);
         gridPowerups.setMaxWidth(400);
         scrollPowerups.setContent(gridPowerups);
@@ -539,6 +537,9 @@ public class GUI extends Application {
         btnExit = new Button("Spiel beenden");
         gridStop.add(btnSave, 0, 0);
         gridStop.add(btnExit, 1, 0);
+        gridStop.setPadding(new Insets(0,0,10,0));
+        btnSave.getStyleClass().add("controlButtons");
+        btnExit.getStyleClass().add("controlButtons");
         gridMain.add(labelTitle, 0, 0);
         gridMain.add(gridPowerups, 0, 1);
         gridMain.add(gridCenter, 1, 1);
@@ -570,7 +571,7 @@ public class GUI extends Application {
         });
 
         //styling from scene1
-        scene1 = new Scene(gridMain, 1500, 775);
+        scene1 = new Scene(gridMain, 1500, 790);
         scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
         //Thread (update labels)
