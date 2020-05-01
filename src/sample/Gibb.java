@@ -58,7 +58,7 @@ public class Gibb {
         String[] powerups = new String[]{"Geld pro Klick erhöhen 1 Mal","Geld pro Klick erhöhen 2 Mal","Geld pro Klick erhöhen 3 Mal","Geld pro Klick erhöhen 4 Mal","Geld pro Klick erhöhen 5 Mal","Geld pro Klick erhöhen 6 Mal","Geld pro Klick erhöhen 7 Mal","Geld pro Klick erhöhen 8 Mal","Geld pro Klick erhöhen 9 Mal","Geld pro Klick erhöhen 10 Mal"};
         for (Upgrades powerup : upgradesList) {
             for (int j = 0; j < powerups.length; j++) {
-                if (powerup.getName().equals(powerups[j])) {
+                if (powerup.getName().equals(powerups[j]) && powerup.isStatus()) {
                     if (this.multiplier == 1) {
                         this.multiplier = powerup.getMultiplier();
                     } else {
