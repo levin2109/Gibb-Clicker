@@ -19,9 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import sun.misc.ClassLoaderUtil;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,7 +191,7 @@ public class GUI extends Application {
                             for (int i = 1; i <= 10; i++) {
                                 Tools.registrateTools(userId, i, 0, false);
                             }
-                            for (int i = 1; i <= 40; i++) {
+                            for (int i = 1; i <= 50; i++) {
                                 Upgrades.registrateUpgrades(userId, i, false);
                             }
                             toolsList = Tools.loadTools(usernameRegistration.getText());
